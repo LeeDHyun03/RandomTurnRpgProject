@@ -4,7 +4,7 @@
 Shop::Shop() {}
 Shop::Shop(string name, vector<Item*> itemlist) : shopName(name), itemList(itemlist) {}
 
-
+//Push ready
 void Shop::Shopping(Player* player)
 {
 	cout << shopName << "에 방문했습니다." << endl;
