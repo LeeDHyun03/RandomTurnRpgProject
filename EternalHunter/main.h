@@ -1,20 +1,15 @@
-#pragma once
-#include "gameManager.h"
+#ifndef MAIN_H
+#define MAIN_H
 
+// í•„ìš”í•œ í—¤ë” íŒŒì¼ë“¤
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
 
-int main()
-{
-	GameManager* gm = new GameManager;
-	cout << "Ä³¸¯ÅÍ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä. : ";
-	string name;
-	getline(cin, name);
-	gm->player.setName(name);
+#include "GameManager.h"
 
+// ê²Œì„ì„ ì‹œì‘í•˜ëŠ” í•¨ìˆ˜ ì„ ì–¸
+void startGame();
 
-
-
-
-	delete gm;
-}
-
-
+#endif // MAIN_H
