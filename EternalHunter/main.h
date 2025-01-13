@@ -7,7 +7,7 @@
 #include <ctime>
 #include <string>
 
-#include "GameManager.h"
+#include "gameManager.h"
 
 // 게임을 시작하는 함수 선언
 void startGame();
