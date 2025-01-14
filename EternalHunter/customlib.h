@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <stdexcept>
-
+//2
 using namespace std;
 
 template <typename T>
