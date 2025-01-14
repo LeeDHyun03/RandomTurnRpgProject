@@ -7,7 +7,7 @@ int main() {
 
     GameManager gm;
 
-    gm.startGame();
+    gm.StartGame();
 
     return 0;
 }

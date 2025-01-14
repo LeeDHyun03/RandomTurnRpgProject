@@ -8,8 +8,8 @@ class Shop
 private:
 	string shopName;
 public:
-	Shop() {}
-	Shop(string name, vector<Item*> itemlist) : shopName(name), itemList(itemlist) {}
+	Shop();
+	Shop(string name, vector<Item*> itemlist);
 	vector<Item*> itemList = {new HealthPotion, new DamageBoost };
 	virtual ~Shop();
 	string getShopName();
