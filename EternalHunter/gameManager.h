@@ -21,18 +21,7 @@ T RandomItemFromVector(const std::vector<T>& vec)
 	return vec[index];
 }
 
-bool ProbabilityCheck(int probability)
-{
-	srand(time(NULL));
-	if (rand() % 100 <= probability)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
+bool ProbabilityCheck(int probability);
 
 
 class GameManager
