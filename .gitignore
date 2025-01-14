@@ -72,3 +72,16 @@ Plugins/**/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# ±‚≈∏
+*.user
+*.userosscache
+*.suo
+*.log
+*.tlog
+*.idb
+*.bak
+*.swp
+*.ilk
+*.pdb
+*.lastbuildstate
