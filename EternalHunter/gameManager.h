@@ -9,19 +9,6 @@
 
 using namespace std;
 
-template <typename T>
-T RandomItemFromVector(const std::vector<T>& vec)
-{
-	srand(time(NULL));
-	if (vec.empty())
-	{
-		throw std::runtime_error("Vector is empty.");
-	}
-	size_t index = rand() % vec.size();
-	return vec[index];
-}
-
-bool ProbabilityCheck(int probability);
 
 
 class GameManager

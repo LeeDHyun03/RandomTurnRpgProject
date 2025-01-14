@@ -16,12 +16,24 @@
     <ClCompile Include="Player.cpp">
       <Filter>Character\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Item\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomLib.cpp">
+      <Filter>CustomLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
       <Filter>Character</Filter>
     </ClInclude>
-    <ClInclude Include="monster.h">
+    <ClInclude Include="Monster.h">
       <Filter>Character\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -30,7 +42,7 @@
     <ClInclude Include="gameManager.h">
       <Filter>GameManager</Filter>
     </ClInclude>
-    <ClInclude Include="item.h">
+    <ClInclude Include="Item.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="shop.h">
@@ -42,7 +54,7 @@
     <ClInclude Include="main.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="customlib.h">
+    <ClInclude Include="CustomLib.h">
       <Filter>CustomLib</Filter>
     </ClInclude>
   </ItemGroup>
@@ -68,11 +80,11 @@
     <Filter Include="main">
       <UniqueIdentifier>{de3c5ae3-6ca8-4668-a7af-0cb3e6068146}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CustomLib">
-      <UniqueIdentifier>{919964c9-e9e9-493b-a670-dfe7b9f8a6bd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Character\Player">
       <UniqueIdentifier>{aae56398-5b03-4220-921b-b6c29f5ba87d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CustomLib">
+      <UniqueIdentifier>{919964c9-e9e9-493b-a670-dfe7b9f8a6bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

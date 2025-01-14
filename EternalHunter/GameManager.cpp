@@ -78,7 +78,7 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 {
 	int xp = 50;
 	int gold = randomInRange(10, 20);
-	player->gainXP(xp);
+	player->gainXp(xp);
 	cout << "XpÀ» " << xp << "¸¸Å­ È¹µæÇß½À´Ï´Ù" << endl;
 	player->modifyGold(gold);
 	cout << "°ñµå¸¦ " << gold << "¸¸Å­ È¹µæÇß½À´Ï´Ù" << endl;

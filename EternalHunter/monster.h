@@ -1,45 +1,41 @@
-#include "character.h"
+#include "Character.h"
+#include "Item.h"
 using namespace std;
 
 class Monster : public Character
 {
 public:
-	Monster(string name, int level, vector<Item*> itemList) : Character(name, level* randomInRange(20, 30), level* randomInRange(20, 30), level* randomInRange(5, 10), itemList) {}
+	Monster(string name, int level, vector<Item*> itemList);
 
-	void showInfo() {
-
-		cout << "-----------------------------------------------------------------------" << endl;
-		cout << "몬스터 " << this->getName() << " 등장!" << endl;
-		cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
-	}
+	void showInfo();
 };
 
 class Goblin : public Monster
 {
 public:
-	Goblin(int level) : Monster("Goblin", level, {new HealthPotion}) {}
+	Goblin(int level);
 };
 
 class Orc : public Monster
 {
 public:
-	Orc(int level) : Monster("Orc", level, {}) {}
+	Orc(int level);
 };
 
 class Troll : public Monster
 {
 public:
-	Troll(int level) : Monster("Troll", level, {}) {}
+	Troll(int level);
 };
 
 class Slime : public Monster
 {
 public:
-	Slime(int level) : Monster("Slime", level, {}) {}
+	Slime(int level);
 };
 
 class BossMonster : public Character
 {
 public:
-	BossMonster(string name, int level, vector<Item*> itemList) : Character(name, level* randomInRange(20, 30* 1.5f), level* randomInRange(20, 30* 1.5f), level* randomInRange(5, 10* 1.5f), itemList) {}
+	BossMonster(string name, int level, vector<Item*> itemList);
 };

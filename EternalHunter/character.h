@@ -4,6 +4,7 @@
 #include <random>
 #include <time.h>
 #include "item.h"
+#include "customlib.h"
 using namespace std;
 
 /// <summary>
@@ -12,10 +13,7 @@ using namespace std;
 /// <param name="start">: Start Number</param>
 /// <param name="end">: End numberis included</param>
 /// <returns></returns>
-int randomInRange(int start, int end);
-float randomInRange(int start, float end);
-float randomInRange(float start, int end);
-float randomInRange(float start, float end);
+
 
 
 class Character

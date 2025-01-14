@@ -7,17 +7,17 @@ Player::Player():Character("Player",200,200,30,{}),level(1),xp(0),gold(0){}
 
 Player::~Player(){}
 
-void Player::gainXP(int amount)
+void Player::gainXp(int amount) //경험치 획득 100넘으면 레벨업
 {
 	xp += amount;
 	if (xp >= 100)
 	{
 		xp -= 100;
-		levelUP();
+		levelUp();
 	}
 }
 
-void Player::levelUP() //setmaxHealth->setMaxHealth로 변경
+void Player::levelUp() //레벨업
 {
 	if (level < 10)
 	{
@@ -53,7 +53,7 @@ void Player::modifyGold(int gold)
 	this->gold += gold;
 }
 
-void Player::showStatus()
+void Player::showStatus() //캐릭터 스팩
 {
 	cout << "-----------------------------------------------------------------------" << endl;
 	cout << "캐릭터 상태: " << endl;

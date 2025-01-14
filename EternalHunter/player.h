@@ -15,8 +15,8 @@ public:
 
 	~Player();
 
-	void gainXP(int amount);
-	void levelUP();
+	void gainXp(int amount);
+	void levelUp();
 
 	int getLevel();
 	int getXp();
