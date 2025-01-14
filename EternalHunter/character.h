@@ -36,7 +36,7 @@ public:
 	int getHealth();
 	int getMaxHealth();
 	void setHealth(int health);
-	void setmaxHealth(int maxHealth);
+	void setMaxHealth(int maxHealth);
 	void modifyHealth(int amount);
 
 	int getDamage();

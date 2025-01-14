@@ -42,7 +42,7 @@ void Character::setName(string name) { this->name = name; }
 int Character::getHealth() { return this->health; }
 int Character::getMaxHealth() { return this->maxHealth; }
 void Character::setHealth(int health) { this->health = health; }
-void Character::setmaxHealth(int maxHealth) { this->maxHealth = maxHealth; }
+void Character::setMaxHealth(int maxHealth) { this->maxHealth = maxHealth; }
 void Character::modifyHealth(int amount) { this->health += amount; }
 
 int Character::getDamage() { return this->damage; }

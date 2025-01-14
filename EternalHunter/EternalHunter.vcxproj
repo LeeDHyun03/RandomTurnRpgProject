@@ -22,16 +22,17 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="shop.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="character.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="customlib.h" />
     <ClInclude Include="gameManager.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="monster.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="shop.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Character.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="shop.cpp">
+      <Filter>Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Character\Player</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Character.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="monster.h">
+      <Filter>Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="gameManager.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="shop.h">
+      <Filter>Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="customlib.h">
+      <Filter>CustomLib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Character">
+      <UniqueIdentifier>{326401ff-db4d-4dbf-ac6a-24214d0da1ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Monster">
+      <UniqueIdentifier>{ce5b96f6-e661-4602-9fb2-61e63fefe27d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManager">
+      <UniqueIdentifier>{4be3b552-95ea-447a-9b93-2b141c613167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{b3723f0b-ceb5-485c-afaa-69f3a75bf976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop">
+      <UniqueIdentifier>{27075db9-d180-4727-96db-76329b837757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item\Weapon">
+      <UniqueIdentifier>{08e5e560-6c2b-4474-81d2-0c32f308a6ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{de3c5ae3-6ca8-4668-a7af-0cb3e6068146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CustomLib">
+      <UniqueIdentifier>{919964c9-e9e9-493b-a670-dfe7b9f8a6bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Player">
+      <UniqueIdentifier>{aae56398-5b03-4220-921b-b6c29f5ba87d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
