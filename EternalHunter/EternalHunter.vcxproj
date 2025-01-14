@@ -32,6 +32,7 @@
     <ClInclude Include="monster.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="shop.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
