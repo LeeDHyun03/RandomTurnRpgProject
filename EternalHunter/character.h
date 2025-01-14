@@ -7,14 +7,6 @@
 #include "customlib.h"
 using namespace std;
 
-/// <summary>
-/// Random Number in range(Start, End)
-/// </summary>
-/// <param name="start">: Start Number</param>
-/// <param name="end">: End numberis included</param>
-/// <returns></returns>
-
-
 
 class Character
 {
@@ -42,11 +34,13 @@ public:
 	void modifyDamage(int amount);
 	void takeDamage(int damage);
 
-	vector<Item*> getInventory();
+
+	vector<Item*>& getInventory();
 
 	void useItem(Item* item);
 
 	void addItemToInventory(Item* item);
 
 	void removeItemFromPlayerInventory(int index);
+
 };

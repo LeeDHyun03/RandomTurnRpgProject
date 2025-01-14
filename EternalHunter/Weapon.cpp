@@ -20,17 +20,14 @@ bool Weapon::tryToEnforce(int amount) //강화 로직?
 {
 	if (ProbabilityCheck(enforceProbability))
 	{
-		enforce(amount);
-		if (enforceProbability < 6) enforceProbability -= 5;
-		cout << "강화 성공!! 현재 강화 수치 : " << this->stack << endl;
+
 		return true;
 	}
 	else
 	{
-		cout << "강화에 실패하여 장비가 파괴되었습니다." << endl;
-		this->setName("무기였던 것");  // 강화 실패 시 무기 이름 변경
-		this->setDamageAmount(1);  // 강화 실패 시 데미지 1로 설정
-		cout << "무기 이름 : " << this->getName() << "       데미지 : " << this->getDamageAmount() << endl;
+
 		return false;
 	}
 }
+int Weapon::getStack() { return stack; }
+

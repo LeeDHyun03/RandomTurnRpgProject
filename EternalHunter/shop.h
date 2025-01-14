@@ -1,6 +1,7 @@
 #pragma once
 #include "player.h"
 #include "item.h"
+#include "customlib.h"
 
 using namespace std;
 class Shop
@@ -18,7 +19,7 @@ public:
 
 	void ShowItemlist();
 
-	Item* BuyItem(Player* player, int index);
+	void BuyItem(Player* player, int index);
 
 	void ShowPlayerItemList(Player* player);
 

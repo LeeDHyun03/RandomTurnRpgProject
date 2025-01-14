@@ -20,4 +20,5 @@ public:
 	
 	bool tryToEnforce(int amount);
 	
+	int getStack();
 };

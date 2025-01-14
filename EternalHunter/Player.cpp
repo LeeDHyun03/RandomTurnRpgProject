@@ -61,3 +61,10 @@ void Player::showStatus() //캐릭터 스팩
 		<< ", 공격력: " << this->getDamage() << ", 경험치: " << this->getXp() << ", 골드: " << this->getGold() << endl;
 	cout << "-----------------------------------------------------------------------" << endl;
 }
+
+Weapon* Player::getWeapon() { return myWeapon; }
+
+void Player::applyDamage()
+{
+	modifyDamage(myWeapon->getDamageAmount());
+}

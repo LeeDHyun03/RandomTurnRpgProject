@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h"
+#include "Weapon.H"
 using namespace std;
 
 class Player : public Character
@@ -10,6 +11,7 @@ private:
 	int xp;
 	const int maxXp = 100;
 	int gold;
+	Weapon* myWeapon = new Weapon();
 public:
 	Player();
 
@@ -26,4 +28,8 @@ public:
 	void modifyGold(int gold);
 
 	void showStatus();
+
+	Weapon* getWeapon();
+
+	void applyDamage();
 };
