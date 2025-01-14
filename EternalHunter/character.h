@@ -17,6 +17,28 @@ int randomInRange(int start, int end)
 	srand(time(NULL));
 	return rand() % (end - start + 1) + start;
 }
+float randomInRange(int start, float end)
+{
+	srand(time(NULL));
+	float startN = start * 10.0f;
+	float endN = end * 10.0f;
+	return (rand() % static_cast<int>(endN - startN + 1)) / 10.0f + start;
+}
+float randomInRange(float start, int end)
+{
+	srand(time(NULL));
+	float startN = start * 10.0f;
+	float endN = end * 10.0f;
+	return (rand() % static_cast<int>(endN - startN + 1)) / 10.0f + start;
+}
+float randomInRange(float start, float end)
+{
+	srand(time(NULL));
+	float startN = start * 10.0f;
+	float endN = end * 10.0f;
+	return (rand() % static_cast<int>(endN - startN + 1)) / 10.0f + start;
+}
+
 
 class Character
 {
