@@ -1,17 +1,6 @@
 #include "gameManager.h"
 
-bool ProbabilityCheck(int probability)
-{
-	srand(time(NULL));
-	if (rand() % 100 <= probability)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
+
 
 GameManager::GameManager() { monsters = {}; player = new Player; }
 GameManager::~GameManager()
