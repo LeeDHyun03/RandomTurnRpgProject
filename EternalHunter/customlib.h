@@ -1,25 +1,25 @@
 #pragma once
 
-int randomInRange(int start, int end)
+inline int randomInRange(int start, int end)
 {
 	srand(time(NULL));
 	return rand() % (end - start + 1) + start;
 }
-float randomInRange(int start, float end)
+inline float randomInRange(int start, float end)
 {
 	srand(time(NULL));
 	float startN = start * 10.0f;
 	float endN = end * 10.0f;
 	return (rand() % static_cast<int>(endN - startN + 1)) / 10.0f + start;
 }
-float randomInRange(float start, int end)
+inline float randomInRange(float start, int end)
 {
 	srand(time(NULL));
 	float startN = start * 10.0f;
 	float endN = end * 10.0f;
 	return (rand() % static_cast<int>(endN - startN + 1)) / 10.0f + start;
 }
-float randomInRange(float start, float end)
+inline float randomInRange(float start, float end)
 {
 	srand(time(NULL));
 	float startN = start * 10.0f;
@@ -27,7 +27,7 @@ float randomInRange(float start, float end)
 	return (rand() % static_cast<int>(endN - startN + 1)) / 10.0f + start;
 }
 
-bool ProbabilityCheck(int probability)
+inline bool ProbabilityCheck(int probability)
 {
 	srand(time(NULL));
 	if (rand() % 100 <= probability)
