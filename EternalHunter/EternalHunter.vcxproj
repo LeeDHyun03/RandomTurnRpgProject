@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
+    <ClInclude Include="customlib.h" />
     <ClInclude Include="gameManager.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="main.h" />
