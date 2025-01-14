@@ -6,7 +6,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-
+//±Ë¿Á«ı
 using namespace std;
 
 template <typename T>
