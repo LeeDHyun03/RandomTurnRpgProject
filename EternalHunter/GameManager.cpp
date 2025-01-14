@@ -1,18 +1,5 @@
 #include "gameManager.h"
 
-bool ProbabilityCheck(int probability)
-{
-	srand(time(NULL));
-	if (rand() % 100 <= probability)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 GameManager::GameManager() { monsters = {}; player = new Player; }
 GameManager::~GameManager()
 {
@@ -38,8 +25,10 @@ void GameManager::UsingItemWithProbability(int probability, vector<Item*> player
 	if (ProbabilityCheck(50))
 	{
 		if (player->getInventory().empty()) return;
-		cout << "아이템" << RandomItemFromVector(playerItems)->getName() << "사용!" << endl;
-		player->useItem(RandomItemFromVector(playerItems));
+		Item* randomItem = RandomItemFromVector(playerItems);
+		cout << "아이템" << randomItem->getName() << "사용!" << endl;
+		player->useItem(randomItem);
+		delete randomItem;
 	}
 }
 
@@ -78,7 +67,7 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 {
 	int xp = 50;
 	int gold = randomInRange(10, 20);
-	player->gainXp(xp);
+	player->gainXP(xp);
 	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;
 	player->modifyGold(gold);
 	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;

@@ -1,7 +1,8 @@
-#include "item.h"
-#include "monster.h"
-#include "player.h"
+#include "Item.h"
+#include "Monster.h"
+#include "Player.h"
 #include "Shop.h"
+#include "customlib.h"
 #include <vector>
 #include <iostream>
 #include <stdlib.h>

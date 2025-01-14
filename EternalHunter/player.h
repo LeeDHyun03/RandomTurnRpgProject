@@ -1,22 +1,22 @@
 #pragma once
-#include "character.h"
-
+#include "Character.h"
 using namespace std;
 
 class Player : public Character
 {
 private:
+	const int maxLevel = 10;
 	int level;
 	int xp;
+	const int maxXp = 100;
 	int gold;
-
 public:
 	Player();
 
 	~Player();
 
-	void gainXp(int amount);
-	void levelUp();
+	void gainXP(int amount);
+	void levelUP();
 
 	int getLevel();
 	int getXp();

@@ -7,19 +7,19 @@ Player::Player():Character("Player",200,200,30,{}),level(1),xp(0),gold(0){}
 
 Player::~Player(){}
 
-void Player::gainXp(int amount) //경험치 획득 100넘으면 레벨업
+void Player::gainXP(int amount) //경험치 획득 100넘으면 레벨업
 {
 	xp += amount;
-	if (xp >= 100)
+	if (xp >= maxXp)
 	{
-		xp -= 100;
-		levelUp();
+		xp -= maxXp;
+		levelUP();
 	}
 }
 
-void Player::levelUp() //레벨업
+void Player::levelUP() //레벨업
 {
-	if (level < 10)
+	if (level < maxLevel)
 	{
 		setMaxHealth(getMaxHealth() + level * 20);
 		setHealth(getMaxHealth());

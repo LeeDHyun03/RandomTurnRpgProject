@@ -10,6 +10,7 @@ class Weapon : public Item
 {
 private: 
 	int stack;
+	int enforceProbability = 90;
 
 public:
 	Weapon();
