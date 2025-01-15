@@ -31,7 +31,8 @@ public:
 	void setGold(int gold);
 	void modifyGold(int gold);
 
-	void showStatus();
+	void showInfo() override;
+	void showInfoBattle() override;
 
 	Weapon* getWeapon();
 

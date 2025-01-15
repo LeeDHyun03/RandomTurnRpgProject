@@ -62,6 +62,13 @@ void Player::showInfo() //캐릭터 스팩
 	cout << "-----------------------------------------------------------------------" << endl;
 }
 
+void Player::showInfoBattle()
+{
+	cout << "캐릭터 상태: " << endl;
+	cout <<  " 체력: " << this->getHealth() << "/" << this->getMaxHealth()
+		<< " 공격력: " << this->getDamage() << endl;
+}
+
 Weapon* Player::getWeapon() { return myWeapon; }
 
 void Player::applyDamage()
