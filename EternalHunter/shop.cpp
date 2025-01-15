@@ -30,6 +30,11 @@ void Shop::Shopping(Player* player)
 		cout << "3번 : 무기 강화하기\n";
 		cout << "4번 : 상점 나가기\n";
 		cin >> index;
+		if (!cin)
+		{
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+		}
 		switch (index)
 		{
 		case 1:

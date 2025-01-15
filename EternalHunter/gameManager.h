@@ -7,6 +7,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ public:
 
 	void SetMonsters(int level);
 
-	void UsingItemWithProbability(int probability, vector<Item*> playerItems, Character* character);
+	void UsingItemWithProbability(int probability, Character* character);
 	void IsPlayerWinAtCombat();
 	bool isDieCheck(Monster* monster);
 	void  SetResultAfterCombat(Monster* monster);
