@@ -61,6 +61,7 @@ void DamageBoost::itemUse(Character* character)
 }
 void DamageBoost::DeactivateItem(Character* character)
 {
+	cout << "asdf";
 	character->modifyDamage(-damageAmount);
 	character->setIsDamageBoost(false);
 }
