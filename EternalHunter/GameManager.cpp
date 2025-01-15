@@ -1,4 +1,5 @@
 #include "gameManager.h"
+#include <ctime>
 
 GameManager::GameManager() { monsters = {}; player = new Player; }
 GameManager::~GameManager()
@@ -22,9 +23,10 @@ void GameManager::SetMonsters(int level)
 
 void GameManager::UsingItemWithProbability(int probability, vector<Item*> playerItems, Character* character)
 {
+
 	if (ProbabilityCheck(50))
 	{
-		if (player->getInventory().empty()) return;
+		if (player->getInventory().getSize()) return;
 		Item* randomItem = RandomItemFromVector(playerItems);
 		cout << "아이템" << randomItem->getName() << "사용!" << endl;
 		player->useItem(randomItem);
@@ -57,8 +59,8 @@ void GameManager::IsPlayerWinAtCombat()
 		}
 		else
 		{
-			cout << "asdfasdf";
-			UsingItemWithProbability(70, player->getInventory(), player);
+			cout << "플레이어의 체력: " << player->getHealth() << endl;
+			cout << monster->getName() << "의 체력: " << monster->getHealth() << endl;
 		}
 	}
 }

@@ -62,7 +62,7 @@ void Shop::Shopping(Player* player)
 				ShowPlayerItemList(player);
 				cout << "판매할 아이템 인덱스를 입력해주세요\n";
 				cin >> index;
-				if (index < player->getInventory().size())
+				if (index < player->getInventory().getSize())
 				{
 					SellItem(player, index);
 					break;
@@ -134,34 +134,41 @@ void Shop::ShowItemlist()
 		cout << i << ":" << itemList[i]->getName() << "              가격 : " << itemList[i]->getPrice() << endl;
 	}
 }
+void Shop::ShowPlayerItemList(Player* player) {
+	cout << "플레이어 아이템 목록" << endl;
+	player->showInventory();  // 플레이어의 인벤토리 아이템 목록을 보여줌
+}
 
 void Shop::BuyItem(Player* player, int index)
 {
-	if (player->getGold() > itemList[index]->getPrice())
+	// 아이템 구매가 가능한지 확인
+	if (player->getGold() >= itemList[index]->getPrice())
 	{
-		cout << "\n" << itemList[index]->getName() << "을(를) 구매했습니다." << endl;
-		player->modifyGold(-itemList[index]->getPrice());
-		cout << "현재 잔액 : " << player->getGold() << "골드" << endl;
-		player->addItemToInventory(itemList[index]);
+		Item* item = itemList[index];
+		cout << item->getName() << "을(를) 구매했습니다.\n";
+		player->modifyGold(-item->getPrice());  // 골드 차감
+		cout << "현재 잔액: " << player->getGold() << " 골드\n";
+
+		// 아이템을 플레이어 인벤토리에 추가
+		player->addItemToInventory(item);
 	}
 	else
 	{
-		cout << "돈이 모자라" << endl;
+		cout << "돈이 모자라서 구매할 수 없습니다.\n";
 	}
 }
 
-void Shop::ShowPlayerItemList(Player* player)
-{
-	cout << "플레이어 아이템 목록" << endl;
-	for (int i = 0; i < player->getInventory().size(); i++)
-	{
-		cout << player->getInventory()[i]->getName() << endl;
-	}
-}
+
 
 void Shop::SellItem(Player* player, int index)
 {
-	cout << player->getInventory().at(index)->getName() << "를 팔고 " << player->getInventory().at(index)->getPrice() << "골드를 얻었습니다." << endl;
-	player->modifyGold(player->getInventory().at(index)->getPrice());
-	player->removeItemFromPlayerInventory(index);
+	if (index >= 0 && index < player->getInventory().getSize()) {
+		Item* itemToSell = player->getInventory().getItem(index);
+		cout << itemToSell->getName() << "을(를) 팔고 " << itemToSell->getPrice() << "골드를 얻었습니다.\n";
+		player->modifyGold(itemToSell->getPrice());  // 골드 증가
+		player->removeItemFromInventory(index);  // 아이템 판매 후 인벤토리에서 제거
+	}
+	else {
+		cout << "잘못된 아이템 인덱스입니다.\n";
+	}
 }

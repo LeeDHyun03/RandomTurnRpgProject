@@ -28,6 +28,7 @@
     <ClCompile Include="CustomLib.cpp">
       <Filter>CustomLib</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -57,6 +58,7 @@
     <ClInclude Include="CustomLib.h">
       <Filter>CustomLib</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Character">

@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.38.33130:TargetPlatformVersion=10.0.26100.0:
-Debug|x64|C:\Users\great\RandomTurnRpgProject\EternalHunter\|
-=======
-PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.38.33130:TargetPlatformVersion=10.0.22621.0:
-Debug|x64|C:\Users\KimJH\RandomTurnRpgProject\EternalHunter\|
->>>>>>> 45b67c5deec4513d91b175b5f751427a5cb1e3f5
+PlatformToolSet=v143:VCToolArchitecture=Native64Bit:VCToolsVersion=14.42.34433:TargetPlatformVersion=10.0.22621.0:
+Debug|x64|C:\Users\a3749\RandomTurnRpgProject\EternalHunter\|
