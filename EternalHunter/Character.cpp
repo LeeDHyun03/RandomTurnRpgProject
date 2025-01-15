@@ -29,6 +29,10 @@ void Character::useItem(Item* item)
 {
 	modifyHealth(item->getHealthAmount());
 	modifyDamage(item->getDamageAmount());
+	if (getHealth() > getMaxHealth())
+	{
+		setHealth(getMaxHealth());
+	}
 }
 
 void Character::addItemToInventory(Item* item)
