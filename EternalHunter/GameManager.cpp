@@ -21,16 +21,15 @@ void GameManager::SetMonsters(int level)
 	this->monsters = { new Goblin(level), new Orc(level), new Troll(level), new Slime(level) };
 }
 
-void GameManager::UsingItemWithProbability(int probability, vector<Item*> playerItems, Character* character)
+void GameManager::UsingItemWithProbability(int probability, Character* character)
 {
-
 	if (ProbabilityCheck(50))
 	{
-		if (player->getInventory().getSize()) return;
+		if (player->getInventory().empty()) return;
 		Item* randomItem = RandomItemFromVector(playerItems);
 		cout << "아이템" << randomItem->getName() << "사용!" << endl;
 		player->useItem(randomItem);
-		delete randomItem;
+		player->removeItemFromPlayerInventory(index);
 	}
 }
 
@@ -41,14 +40,19 @@ void GameManager::IsPlayerWinAtCombat()
 	monster->firstShowInfo();
 	while (true)
 	{
+		Sleep(1000);
 		DealDamage(player, monster);
+		Sleep(1000);
 		if (isDieCheck(monster)) return;
 		DealDamage(monster, player);
+		Sleep(1000);
 		if (isDieCheck(monster)) return;
-
+		UsingItemWithProbability(70, player);
+		//system("cls");
 		monster->showInfo();
 	}
 }
+
 bool GameManager::isDieCheck(Monster* monster)
 {
 	if (monster->getHealth() <= 0)
@@ -70,8 +74,10 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 	int xp = 50;
 	int gold = randomInRange(10, 20);
 	player->gainXP(xp);
+	Sleep(1000);
 	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;
 	player->modifyGold(gold);
+	Sleep(1000);
 	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;
 
 	player->showInfo();
@@ -84,12 +90,14 @@ void GameManager::DealDamage(Character* attacker, Character* victim)
 	if (ProbabilityCheck(10))
 	{
 		cout << attacker->getName() << "이(가) " << victim->getName() << "에게 강력한 공격을 선사합니다!!!" << endl;
+		Sleep(1000);
 		damage *= 2;
 	}
 	//반사
 	if (ProbabilityCheck(1))
 	{
 		cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 반사했습니다!!!!!!!!!" << endl;
+		Sleep(1000);
 		cout << victim->getName() << "이(가) " << attacker->getName() << "에게 " << damage << "만큼 데미지를 입혔습니다!!!!!!" << endl;
 		cout << "대단하군요!!!\n";
 		attacker->takeDamage(damage);
