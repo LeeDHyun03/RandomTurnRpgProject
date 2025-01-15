@@ -16,12 +16,24 @@ private:
     vector<UseItem*> items;  // 아이템 벡터 (플레이어가 보유한 아이템 목록)
 
 public:
-    Inventory();  // 기본 생성자
-    ~Inventory(); // 소멸자 (아이템 메모리 관리)
+    // 기본 생성자
+    Inventory();  
 
-    void addItem(UseItem* item);  // 인벤토리에 아이템 추가
-    void removeItem(int index);  // 인벤토리에서 아이템 제거
-    void showItems() const;  // 아이템 목록 출력
-    UseItem* getItem(int index) const;  // 아이템 하나 반환
-    int getSize() const;  // 인벤토리 크기 (아이템 개수 반환)
+    // 소멸자 (아이템 메모리 관리)
+    ~Inventory();
+
+    // 인벤토리에 아이템 추가
+    void addItem(UseItem* item);
+
+    // 인벤토리에서 아이템 제거
+    void removeItem(int index);
+
+    // 아이템 목록 출력
+    void showItems() const;  
+
+    // 아이템 하나 반환
+    UseItem* getItem(int index) const;
+
+    // 인벤토리 크기 (아이템 개수 반환)
+    int getSize() const;  
 };

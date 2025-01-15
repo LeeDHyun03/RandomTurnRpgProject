@@ -1,6 +1,6 @@
 #pragma once
 #include "item.h"
-
+//UseItem 파일 추가
 class Character;
 class UseItem : public Item
 {
