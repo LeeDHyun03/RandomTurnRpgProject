@@ -1,9 +1,6 @@
-﻿  GameManager.cpp
-  Inventory.cpp
-C:\Users\a3749\RandomTurnRpgProject\EternalHunter\Inventory.cpp(43,22): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  main.cpp
-C:\Users\a3749\RandomTurnRpgProject\EternalHunter\main.cpp(8,15): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Player.cpp
-  shop.cpp
-  코드를 생성하고 있습니다...
-  EternalHunter.vcxproj -> C:\Users\a3749\RandomTurnRpgProject\EternalHunter\x64\Debug\EternalHunter.exe
+﻿  music.cpp
+C:\Users\a3749\RandomTurnRpgProject\EternalHunter\music.cpp(31,17): warning C4477: 'scanf_s' : 서식 문자열 '%s'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'size_t'입니다.
+      C:\Users\a3749\RandomTurnRpgProject\EternalHunter\music.cpp(31,17):
+      이 인수는 버퍼 크기로 사용됩니다.
+  
+LINK : fatal error LNK1104: 'winuser.lib' 파일을 열 수 없습니다.
