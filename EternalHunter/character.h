@@ -15,10 +15,9 @@ private:
 	int health;
 	int maxHealth;
 	int damage;
-	vector<Item*> itemList = {};
 public:
 	Character();
-	Character(string name, int health, int maxHealth, int damage, vector<Item*> itemlist);
+	Character(string name, int health, int maxHealth, int damage);
 	virtual ~Character();
 	string getName();
 	void setName(string name);
@@ -34,15 +33,8 @@ public:
 	void modifyDamage(int amount);
 	void takeDamage(int damage);
 
-
-	vector<Item*>& getInventory();
-
 	void useItem(Item* item);
-
-	void addItemToInventory(Item* item);
-
-	void removeItemFromPlayerInventory(int index);
-
+	
 	virtual void firstShowInfo();
 	virtual void showInfo();
 	virtual void showInfoBattle();

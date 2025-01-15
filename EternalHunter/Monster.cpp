@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Monster::Monster(string name, int level, vector<Item*> itemList) //몬스터 기본 생성자
-	: Character(name, level* randomInRange(20, 30), level* randomInRange(20, 30), level* randomInRange(5, 10), itemList) {}
+Monster::Monster(string name, int level) //몬스터 기본 생성자
+	: Character(name, level* randomInRange(20, 30), level* randomInRange(20, 30), level* randomInRange(5, 10)) {}
 
 void Monster::firstShowInfo() //몬스터 등장 정보
 {
@@ -21,19 +21,19 @@ void Monster::showInfo() //몬스터 정보
 }
 
 Goblin::Goblin(int level) 
-	: Monster("Goblin", level, { new HealthPotion }) {}
+	: Monster("Goblin", level) {}
 
 Orc::Orc(int level) 
-	: Monster("Orc", level, {}) {}
+	: Monster("Orc", level) {}
 
 Troll::Troll(int level) 
-	: Monster("Troll", level, {}) {}
+	: Monster("Troll", level) {}
 
 Slime::Slime(int level) 
-	: Monster("Slime", level, {}) {}
+	: Monster("Slime", level) {}
 
 Dragon::Dragon(string name, int level, vector<Item*> itemList) //보스몬스터
-	: Character(name, level* randomInRange(20, 30 * 1.5f), level* randomInRange(20, 30 * 1.5f), level* randomInRange(5, 10 * 1.5f), itemList) {}
+	: Character(name, level* randomInRange(20, 30 * 1.5f), level* randomInRange(20, 30 * 1.5f), level* randomInRange(5, 10 * 1.5f)) {}
 
 void Dragon::firstShowInfo()
 {

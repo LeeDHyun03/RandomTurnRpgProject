@@ -5,7 +5,7 @@ using namespace std;
 class Monster : public Character
 {
 public:
-	Monster(string name, int level, vector<Item*> itemList);
+	Monster(string name, int level);
 
 	void firstShowInfo() override;
 	void showInfo() override;

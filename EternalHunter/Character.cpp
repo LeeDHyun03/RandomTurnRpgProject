@@ -1,14 +1,8 @@
 #include "character.h"
 
 Character::Character() : name("Unnamed"), health(100), maxHealth(100), damage(10) {}
-Character::Character(string name, int health, int maxHealth, int damage, vector<Item*> itemlist) : name(name), health(health), maxHealth(maxHealth), damage(damage), itemList(itemlist) {}
-Character::~Character()
-{
-	for (int i = 0; i < itemList.size(); i++)
-	{
-		delete itemList[i];
-	}
-}
+Character::Character(string name, int health, int maxHealth, int damage) : name(name), health(health), maxHealth(maxHealth), damage(damage) {}
+Character::~Character() {}
 string Character::getName() { return this->name; }
 void Character::setName(string name) { this->name = name; }
 
@@ -23,8 +17,6 @@ void Character::setDamage(int damage) { this->damage = damage; }
 void Character::modifyDamage(int amount) { this->damage += amount; }
 void Character::takeDamage(int damage) { modifyHealth(-damage); }
 
-vector<Item*>& Character::getInventory() { return this->itemList; }
-
 void Character::useItem(Item* item)
 {
 	modifyHealth(item->getHealthAmount());
@@ -33,16 +25,6 @@ void Character::useItem(Item* item)
 	{
 		setHealth(getMaxHealth());
 	}
-}
-
-void Character::addItemToInventory(Item* item)
-{
-	this->getInventory().push_back(item);
-}
-
-void Character::removeItemFromPlayerInventory(int index)
-{
-	this->getInventory().erase(getInventory().begin() + index);
 }
 
 void Character::showInfo()

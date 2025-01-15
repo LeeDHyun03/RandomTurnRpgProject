@@ -1,5 +1,4 @@
 #include "Item.h"
-
 using namespace std;
 
 Item::Item()
@@ -37,7 +36,7 @@ void Item::setHealthAmount(int healthAmount)
 
 void Item::modifyHealthAmount(int amount)
 {
-	this->damageAmount += damageAmount;
+	this->healthAmount += amount;
 }								//체력 관련
 
 
