@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Player::Player() :Character("Player", 200, 200, 5), level(1), xp(0), gold(0) {}  // 인벤토리 초기화
+Player::Player() :Character("Player", 200, 200, 15), level(1), xp(0), gold(0) {}  // 인벤토리 초기화
 
 Player::~Player() {}
 
@@ -24,6 +24,8 @@ void Player::levelUP() //레벨업
 		setMaxHealth(getMaxHealth() + level * 20);
 		setHealth(getMaxHealth());
 		setDamage(getDamage() + level * 5);
+		cout << "\nLevel Up!!! 성장하셨습니다!!\n";
+		cout << "최대 HP: " << getMaxHealth() << "   " << "공격력: " << getDamage() << endl;
 		level++;
 	}
 }
@@ -77,7 +79,7 @@ void Player::applyDamage()
 }
 
 
-void Player::addItemToInventory(Item* item) {
+void Player::addItemToInventory(UseItem* item) {
 	inventory.addItem(item);  // 인벤토리에 아이템 추가
 }
 

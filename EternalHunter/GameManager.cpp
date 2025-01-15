@@ -27,18 +27,14 @@ void GameManager::UsingItemWithProbability(int probability, Character* character
 	{
 		if (player->getInventory().getSize() == 0)
 		{
-			cout << "인벤토리가 비어서 아이템을 사용할 게 없습니다..." << endl;
 			return;
 		}
 		int i = player->getInventory().getSize();
-
 		int index = randomInRange(0, i - 1);
-
-		Item* randomItem = player->getInventory().getItem(index);
-
+		UseItem* randomItem = player->getInventory().getItem(index);
+		randomItem->itemUse(character);
+		if (randomItem->getIsActivate()) activateItems.push_back(randomItem->clone());
 		cout << "아이템" << randomItem->getName() << "사용!" << endl;
-
-		player->useItem(randomItem);
 
 		player->removeItemFromInventory(index);
 
@@ -52,6 +48,7 @@ void GameManager::IsPlayerWinAtCombat()
 	monster->firstShowInfo();
 	while (true)
 	{
+		DeactivateItem();
 		Sleep(1000);
 		DealDamage(player, monster);
 		Sleep(1000);
@@ -59,8 +56,9 @@ void GameManager::IsPlayerWinAtCombat()
 		DealDamage(monster, player);
 		Sleep(1000);
 		if (isDieCheck(monster)) return;
-		UsingItemWithProbability(100, player);
+		UsingItemWithProbability(70, player);
 		monster->showInfo();
+		player->showInfoBattle();
 	}
 }
 
@@ -84,10 +82,11 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 {
 	int xp = 50;
 	int gold = randomInRange(10, 20);
+	player->modifyGold(gold);
+	player->gainXP(xp);
 	Sleep(1000);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11 | 0 << 4);
 	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;
-	player->modifyGold(gold);
 	Sleep(1000);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14 | 0 << 4);
 	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;
@@ -149,6 +148,21 @@ void GameManager::VisitAtShop()
 	else
 	{
 		shops[0]->Shopping(player);
+	}
+}
+
+void GameManager::DeactivateItem()
+{
+	if (activateItems.size() == 0) return;
+	for (int i = 0; i < activateItems.size(); i++)
+	{
+		activateItems[i]->modifyActivateTurn(1);
+		if (activateItems[i]->getActivateTurn() < activateItems[i]->getCurrentctivateTurn())
+		{
+			activateItems[i]->DeactivateItem(player);
+			delete activateItems[i];
+			activateItems.erase(activateItems.begin() + i);
+		}
 	}
 }
 

@@ -7,8 +7,8 @@ Weapon::Weapon() //무기 기본생성자
 	this->setDamageAmount(10);
 }
 
-Weapon::Weapon(string name, int price, int healthAmount, int damageAmount, int stack) 
-	: stack(stack), Item(name, price, healthAmount, damageAmount) {} //무기 기본 정보
+Weapon::Weapon(string name, int price, int damageAmount, int stack) 
+	: stack(stack), damageAmount(damageAmount), Item(name, price) {} //무기 기본 정보
 
 void Weapon::enforce(int amount) //무기 강화
 {

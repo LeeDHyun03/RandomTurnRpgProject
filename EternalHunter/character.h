@@ -15,6 +15,7 @@ private:
 	int health;
 	int maxHealth;
 	int damage;
+	bool isDamageBoost = false;
 public:
 	Character();
 	Character(string name, int health, int maxHealth, int damage);
@@ -35,6 +36,9 @@ public:
 
 	void useItem(Item* item);
 	
+	bool getIsDamageBoost();
+	void setIsDamageBoost(bool isDamageBoost);
+
 	virtual void firstShowInfo();
 	virtual void showInfo();
 	virtual void showInfoBattle();

@@ -14,18 +14,8 @@ void Character::modifyHealth(int amount) { this->health += amount; }
 
 int Character::getDamage() { return this->damage; }
 void Character::setDamage(int damage) { this->damage = damage; }
-void Character::modifyDamage(int amount) { this->damage += amount; }
+void Character::modifyDamage(int amount) { cout << "asdf"; this->damage += amount; }
 void Character::takeDamage(int damage) { modifyHealth(-damage); }
-
-void Character::useItem(Item* item)
-{
-	modifyHealth(item->getHealthAmount());
-	modifyDamage(item->getDamageAmount());
-	if (getHealth() > getMaxHealth())
-	{
-		setHealth(getMaxHealth());
-	}
-}
 
 void Character::showInfo()
 {
@@ -34,6 +24,8 @@ void Character::showInfo()
 	cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
 
 }
+bool Character::getIsDamageBoost() { return isDamageBoost; }
+void Character::setIsDamageBoost(bool isDamageBoost) {	this->isDamageBoost = isDamageBoost;  }
 
 void Character::firstShowInfo()
 {

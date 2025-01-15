@@ -39,7 +39,7 @@ public:
 	void applyDamage();
 
 	// 인벤토리 관련 메소드
-	void addItemToInventory(Item* item);
+	void addItemToInventory(UseItem* item);
 	void removeItemFromInventory(int index);
 	void showInventory() const;
 

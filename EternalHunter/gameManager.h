@@ -3,12 +3,12 @@
 #include "Player.h"
 #include "Shop.h"
 #include "customlib.h"
+#include "useItem.h"
 #include <vector>
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-
 using namespace std;
 
 
@@ -20,6 +20,7 @@ private:
 public:
 	vector<Monster*> monsters;
 	vector<Shop*> shops = { new NormalShop({new HealthPotion, new DamageBoost}), new HiddenShop({new HealthPotion, new DamageBoost}) };
+	vector<UseItem*> activateItems;
 	Player* player;
 	GameManager();
 	~GameManager();
@@ -34,7 +35,7 @@ public:
 	void DealDamage(Character* attacker, Character* victim);
 	void VisitAtShop();
 
-
+	void DeactivateItem();
 
 	void Defeat();
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "shop.h"
 Shop::Shop() {}
-Shop::Shop(string name, vector<Item*> itemlist) : shopName(name), itemList(itemlist) {}
-vector<Item*> itemList = { new HealthPotion, new DamageBoost };
+Shop::Shop(string name, vector<UseItem*> itemlist) : shopName(name), itemList(itemlist) {}
+vector<UseItem*> itemList = { new HealthPotion, new DamageBoost };
 Shop::~Shop()
 {
 	for (int i = 0; i < itemList.size(); i++)
@@ -149,7 +149,7 @@ void Shop::BuyItem(Player* player, int index)
 	// 아이템 구매가 가능한지 확인
 	if (player->getGold() >= itemList[index]->getPrice())
 	{
-		Item* item = itemList[index];
+		UseItem* item = itemList[index];
 		cout << item->getName() << "을(를) 구매했습니다.\n";
 		player->modifyGold(-item->getPrice());  // 골드 차감
 		cout << "현재 잔액: " << player->getGold() << " 골드\n";

@@ -10,7 +10,7 @@ Inventory::~Inventory() {
     }
 }
 
-void Inventory::addItem(Item* item) {
+void Inventory::addItem(UseItem* item) {
     items.push_back(item);  // 아이템을 벡터에 추가
 }
 
@@ -32,7 +32,7 @@ void Inventory::showItems() const {
     }
 }
 
-Item* Inventory::getItem(int index) const {
+UseItem* Inventory::getItem(int index) const {
     if (index >= 0 && index < items.size()) {
         return items[index];
     }

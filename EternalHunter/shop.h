@@ -1,6 +1,7 @@
 #pragma once
 #include "player.h"
 #include "item.h"
+#include "useItem.h"
 #include "customlib.h"
 
 using namespace std;
@@ -10,8 +11,8 @@ private:
 	string shopName;
 public:
 	Shop();
-	Shop(string name, vector<Item*> itemlist);
-	vector<Item*> itemList = {new HealthPotion, new DamageBoost };
+	Shop(string name, vector<UseItem*> itemlist);
+	vector<UseItem*> itemList = {new HealthPotion, new DamageBoost };
 	virtual ~Shop();
 	string getShopName();
 
@@ -29,13 +30,13 @@ public:
 class NormalShop : public Shop
 {
 public:
-	NormalShop(vector<Item*> itemlist) : Shop("NormalShop", itemlist) {}
+	NormalShop(vector<UseItem*> itemlist) : Shop("NormalShop", itemlist) {}
 	~NormalShop(){}
 };
 
 class HiddenShop : public Shop
 {
 public:
-	HiddenShop(vector<Item*> itemlist) : Shop("HiddenShop", itemlist) {}
+	HiddenShop(vector<UseItem*> itemlist) : Shop("HiddenShop", itemlist) {}
 	~HiddenShop(){}
 };
