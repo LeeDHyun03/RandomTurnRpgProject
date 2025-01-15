@@ -6,11 +6,17 @@ using namespace std;
 Monster::Monster(string name, int level, vector<Item*> itemList) //몬스터 기본 생성자
 	: Character(name, level* randomInRange(20, 30), level* randomInRange(20, 30), level* randomInRange(5, 10), itemList) {}
 
-void Monster::showInfo() //몬스터 정보
+void Monster::FirstShowInfo() //몬스터 정보
 {
 	cout << "-----------------------------------------------------------------------" << endl;
 	cout << "몬스터 " << this->getName() << " 등장!" << endl;
 	cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
+}
+void Monster::showInfo() //몬스터 정보
+{
+	cout << "\n";
+	cout << "몬스터: " << this->getName() << endl;
+	cout << "남은 체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
 }
 
 Goblin::Goblin(int level) 

@@ -14,6 +14,8 @@ using namespace std;
 
 class GameManager
 {
+private:
+	string input = string();
 public:
 	vector<Monster*> monsters;
 	vector<Shop*> shops = { new NormalShop({new HealthPotion, new DamageBoost}), new HiddenShop({new HealthPotion, new DamageBoost}) };
@@ -25,7 +27,7 @@ public:
 
 	void UsingItemWithProbability(int probability, vector<Item*> playerItems, Character* character);
 	void IsPlayerWinAtCombat();
-
+	bool isDieCheck(Monster* monster);
 	void  SetResultAfterCombat(Monster* monster);
 
 	void DealDamage(Character* attacker, Character* victim);
