@@ -41,3 +41,24 @@ void Character::removeItemFromPlayerInventory(int index)
 	this->getInventory().erase(getInventory().begin() + index);
 }
 
+void Character::showInfo()
+{
+	cout << "-----------------------------------------------------------------------" << endl;
+	cout << "몬스터 " << this->getName() << " 등장!" << endl;
+	cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
+
+}
+
+void Character::firstShowInfo()
+{
+	cout << "-----------------------------------------------------------------------" << endl;
+	cout << "몬스터 " << this->getName() << " 등장!" << endl;
+	cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
+}
+
+void Character::showInfoBattle()
+{
+	cout << "-----------------------------------------------------------------------" << endl;
+	cout << "몬스터 " << this->getName() << " 등장!" << endl;
+	cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
+}

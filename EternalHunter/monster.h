@@ -7,8 +7,8 @@ class Monster : public Character
 public:
 	Monster(string name, int level, vector<Item*> itemList);
 
-	void FirstShowInfo();
-	void showInfo();
+	void firstShowInfo() override;
+	void showInfo() override;
 };
 
 class Goblin : public Monster
@@ -35,8 +35,11 @@ public:
 	Slime(int level);
 };
 
-class BossMonster : public Character
+class Dragon : public Character
 {
 public:
-	BossMonster(string name, int level, vector<Item*> itemList);
+	Dragon(string name, int level, vector<Item*> itemList);
+
+	void firstShowInfo() override;
+	void showInfo() override;
 };

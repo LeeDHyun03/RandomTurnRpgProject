@@ -31,15 +31,11 @@ public:
 	void setGold(int gold);
 	void modifyGold(int gold);
 
-	// 인벤토리 관련 메소드
-	void addItemToInventory(Item* item);
-	void removeItemFromInventory(int index);
-	void showInventory() const;
-
-	const Inventory& getInventory() const;
 	void showStatus();
 
 	Weapon* getWeapon();
 
 	void applyDamage();
+
+
 };

@@ -53,29 +53,13 @@ void Player::modifyGold(int gold)
 	this->gold += gold;
 }
 
-void Player::showStatus() //캐릭터 스팩
+void Player::showInfo() //캐릭터 스팩
 {
 	cout << "-----------------------------------------------------------------------" << endl;
 	cout << "캐릭터 상태: " << endl;
 	cout << "이름: " << this->getName() << ", 레벨: " << this->getLevel() << ", 체력: " << this->getHealth() << "/" << this->getMaxHealth()
 		<< ", 공격력: " << this->getDamage() << ", 경험치: " << this->getXp() << ", 골드: " << this->getGold() << endl;
 	cout << "-----------------------------------------------------------------------" << endl;
-}
-
-void Player::addItemToInventory(Item* item) {
-	inventory.addItem(item);  // 인벤토리에 아이템 추가
-}
-
-void Player::removeItemFromInventory(int index) {
-	inventory.removeItem(index);  // 인벤토리에서 아이템 제거
-}
-
-void Player::showInventory() const {
-	inventory.showItems();  // 인벤토리 아이템 목록 출력
-}
-
-const Inventory& Player::getInventory() const {
-	return inventory;  // 읽기 전용 인벤토리 반환
 }
 
 Weapon* Player::getWeapon() { return myWeapon; }

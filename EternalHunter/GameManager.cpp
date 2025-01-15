@@ -38,29 +38,30 @@ void GameManager::IsPlayerWinAtCombat()
 {
 	SetMonsters(player->getLevel());
 	Monster* monster = RandomItemFromVector(monsters);
-	monster->FirstShowInfo();
+	monster->firstShowInfo();
 	while (true)
 	{
 		DealDamage(player, monster);
-		if (monster->getHealth() <= 0)
-		{
-			cout << monster->getName() << "À»(¸¦) " << "¾²·¯¶ß·È½À´Ï´Ù!!" << endl << endl;
-			SetResultAfterCombat(monster);
-			break;
-		}
-
+		if (isDieCheck(monster)) return;
 		DealDamage(monster, player);
-		if (player->getHealth() <= 0)
-		{
-			cout << monster->getName() << "¿¡°Ô »ç¸ÁÇß½À´Ï´Ù..." << endl;
-			Defeat();
-			break;
-		}
-		else
-		{
-			cout << "asdfasdf";
-			UsingItemWithProbability(70, player->getInventory(), player);
-		}
+		if (isDieCheck(monster)) return;
+
+		monster->showInfo();
+	}
+}
+bool GameManager::isDieCheck(Monster* monster)
+{
+	if (monster->getHealth() <= 0)
+	{
+		cout << monster->getName() << "À»(¸¦) " << "¾²·¯¶ß·È½À´Ï´Ù!!" << endl << endl;
+		SetResultAfterCombat(monster);
+		return true;
+	}
+	if (player->getHealth() <= 0)
+	{
+		cout << monster->getName() << "¿¡°Ô »ç¸ÁÇß½À´Ï´Ù..." << endl;
+		Defeat();
+		return true;
 	}
 	return false;
 }
@@ -73,7 +74,7 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 	player->modifyGold(gold);
 	cout << "°ñµå¸¦ " << gold << "¸¸Å­ È¹µæÇß½À´Ï´Ù" << endl;
 
-	player->showStatus();
+	player->showInfo();
 }
 
 void GameManager::DealDamage(Character* attacker, Character* victim)
