@@ -36,33 +36,33 @@ void GameManager::IsPlayerWinAtCombat()
 {
 	SetMonsters(player->getLevel());
 	Monster* monster = RandomItemFromVector(monsters);
+	monster->FirstShowInfo();
 	while (true)
 	{
-		monster->showInfo();
-
 		DealDamage(player, monster);
-		if (monster->getHealth() <= 0)
-		{
-			cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
-			SetResultAfterCombat(monster);
-			break;
-		}
-
+		if (isDieCheck(monster)) return;
 		DealDamage(monster, player);
-		if (player->getHealth() <= 0)
-		{
-			cout << monster->getName() << "에게 사망했습니다..." << endl;
-			Defeat();
-			break;
-		}
-		else
-		{
-			cout << "asdfasdf";
-			UsingItemWithProbability(70, player->getInventory(), player);
-		}
+		if (isDieCheck(monster)) return;
+
+		monster->showInfo();
 	}
 }
-
+bool GameManager::isDieCheck(Monster* monster)
+{
+	if (monster->getHealth() <= 0)
+	{
+		cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
+		SetResultAfterCombat(monster);
+		return true;
+	}
+	if (player->getHealth() <= 0)
+	{
+		cout << monster->getName() << "에게 사망했습니다..." << endl;
+		Defeat();
+		return true;
+	}
+	return false;
+}
 void  GameManager::SetResultAfterCombat(Monster* monster)
 {
 	int xp = 50;
@@ -73,14 +73,45 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;
 
 	player->showStatus();
-
-	VisitAtShop();
 }
 
 void GameManager::DealDamage(Character* attacker, Character* victim)
 {
-	victim->takeDamage(attacker->getDamage());
-	cout << attacker->getName() << "이(가) " << victim->getName() << "에게 " << attacker->getDamage() << "만큼 데미지를 입혔습니다!!" << endl;
+	int damage = attacker->getDamage();
+	//크리티컬 확률
+	if (ProbabilityCheck(10))
+	{
+		cout << attacker->getName() << "이(가) " << victim->getName() << "에게 강력한 공격을 선사합니다!!!" << endl;
+		damage *= 2;
+	}
+	//반사
+	if (ProbabilityCheck(1))
+	{
+		cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 반사했습니다!!!!!!!!!" << endl;
+		cout << victim->getName() << "이(가) " << attacker->getName() << "에게 " << damage << "만큼 데미지를 입혔습니다!!!!!!" << endl;
+		cout << "대단하군요!!!\n";
+		attacker->takeDamage(damage);
+		return;
+	}
+	else
+	{
+		//방어자의 회피
+		if (ProbabilityCheck(10))
+		{
+			cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 피했습니다!!" << endl;
+		}
+		else
+		{
+			//반감
+			if (ProbabilityCheck(10))
+			{
+				cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 빗겨나갔습니다!!" << endl;
+				damage /= 2;
+			}
+			victim->takeDamage(damage);
+			cout << attacker->getName() << "이(가) " << victim->getName() << "에게 " << damage << "만큼 데미지를 입혔습니다!!" << endl;
+		}
+	}
 }
 
 void GameManager::VisitAtShop()
@@ -131,6 +162,10 @@ void GameManager::StartGame()
 		if (player->getHealth() < 0)
 		{
 			break;
+		}
+		else
+		{
+			VisitAtShop();
 		}
 	}
 }
