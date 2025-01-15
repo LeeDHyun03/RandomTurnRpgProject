@@ -53,7 +53,6 @@ void GameManager::IsPlayerWinAtCombat()
 		Sleep(1000);
 		if (isDieCheck(monster)) return;
 		UsingItemWithProbability(70, player);
-		//system("cls");
 		monster->showInfo();
 		player->showInfoBattle();
 	}
@@ -81,11 +80,15 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 	int gold = randomInRange(10, 20);
 	player->gainXP(xp);
 	Sleep(1000);
-	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11 | 0 << 4);
+	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;	
 	player->modifyGold(gold);
 	Sleep(1000);
-	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;
 
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14 | 0 << 4);
+	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
+	Sleep(1000);
 	player->showInfo();
 }
 
@@ -95,7 +98,9 @@ void GameManager::DealDamage(Character* attacker, Character* victim)
 	//크리티컬 확률
 	if (ProbabilityCheck(10))
 	{
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
 		cout << attacker->getName() << "이(가) " << victim->getName() << "에게 강력한 공격을 선사합니다!!!" << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 		Sleep(1000);
 		damage *= 2;
 	}
