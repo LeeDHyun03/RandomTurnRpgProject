@@ -53,7 +53,8 @@ void GameManager::IsPlayerWinAtCombat()
 		DealDamage(monster, player);
 		Sleep(1000);
 		if (isDieCheck(monster)) return;
-
+		UsingItemWithProbability(70, player);
+		//system("cls");
 		monster->showInfo();
 	}
 }
@@ -79,10 +80,12 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 	int xp = 50;
 	int gold = randomInRange(10, 20);
 	player->gainXP(xp);
+	Sleep(1000);
 	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;
 	player->modifyGold(gold);
+	Sleep(1000);
 	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;
-
+	Sleep(1000);
 	player->showStatus();
 }
 
@@ -94,6 +97,7 @@ void GameManager::DealDamage(Character* attacker, Character* victim)
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
 		cout << attacker->getName() << "이(가) " << victim->getName() << "에게 강력한 공격을 선사합니다!!!" << endl;
+		Sleep(1000);
 		damage *= 2;
 	}
 	//반사
