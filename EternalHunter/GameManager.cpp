@@ -36,7 +36,7 @@ void GameManager::IsPlayerWinAtCombat()
 {
 	SetMonsters(player->getLevel());
 	Monster* monster = RandomItemFromVector(monsters);
-	monster->FirstShowInfo();
+	monster->firstShowInfo();
 	while (true)
 	{
 		DealDamage(player, monster);
@@ -45,6 +45,7 @@ void GameManager::IsPlayerWinAtCombat()
 		if (isDieCheck(monster)) return;
 
 		monster->showInfo();
+		player->showInfoBattle();
 	}
 }
 bool GameManager::isDieCheck(Monster* monster)
@@ -72,7 +73,7 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 	player->modifyGold(gold);
 	cout << "°ñµå¸¦ " << gold << "¸¸Å­ È¹µæÇß½À´Ï´Ù" << endl;
 
-	player->showStatus();
+	player->showInfo();
 }
 
 void GameManager::DealDamage(Character* attacker, Character* victim)

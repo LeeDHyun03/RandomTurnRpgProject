@@ -43,4 +43,8 @@ public:
 
 	void removeItemFromPlayerInventory(int index);
 
+	virtual void firstShowInfo();
+	virtual void showInfo();
+	virtual void showInfoBattle();
+
 };

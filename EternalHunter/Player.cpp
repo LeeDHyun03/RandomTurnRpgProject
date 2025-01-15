@@ -53,13 +53,20 @@ void Player::modifyGold(int gold)
 	this->gold += gold;
 }
 
-void Player::showStatus() //캐릭터 스팩
+void Player::showInfo() //캐릭터 스팩
 {
 	cout << "-----------------------------------------------------------------------" << endl;
 	cout << "캐릭터 상태: " << endl;
 	cout << "이름: " << this->getName() << ", 레벨: " << this->getLevel() << ", 체력: " << this->getHealth() << "/" << this->getMaxHealth()
 		<< ", 공격력: " << this->getDamage() << ", 경험치: " << this->getXp() << ", 골드: " << this->getGold() << endl;
 	cout << "-----------------------------------------------------------------------" << endl;
+}
+
+void Player::showInfoBattle()
+{
+	cout << "캐릭터 상태: " << endl;
+	cout <<  " 체력: " << this->getHealth() << "/" << this->getMaxHealth()
+		<< " 공격력: " << this->getDamage() << endl;
 }
 
 Weapon* Player::getWeapon() { return myWeapon; }
