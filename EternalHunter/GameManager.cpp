@@ -23,10 +23,16 @@ void GameManager::SetMonsters(int level)
 
 void GameManager::UsingItemWithProbability(int probability, Character* character)
 {
-	if (ProbabilityCheck(50))
+	if (ProbabilityCheck(probability))
 	{
-		if (player->getInventory().empty()) return;
-		Item* randomItem = RandomItemFromVector(playerItems);
+		if (player->getInventory().empty())
+		{
+			cout << "인벤토리가 비어서 아이템을 사용할 게 없습니다..." << endl;
+			return;
+		}
+		int i = player->getInventory().size();
+		int index = randomInRange(0, i);
+		Item* randomItem = player->getInventory()[index];
 		cout << "아이템" << randomItem->getName() << "사용!" << endl;
 		player->useItem(randomItem);
 		player->removeItemFromPlayerInventory(index);
@@ -47,7 +53,7 @@ void GameManager::IsPlayerWinAtCombat()
 		DealDamage(monster, player);
 		Sleep(1000);
 		if (isDieCheck(monster)) return;
-		UsingItemWithProbability(70, player);
+
 		monster->showInfo();
 	}
 }
@@ -73,17 +79,11 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 	int xp = 50;
 	int gold = randomInRange(10, 20);
 	player->gainXP(xp);
-	Sleep(1000);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11 | 0 << 4);
-	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;	
+	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;
 	player->modifyGold(gold);
-	Sleep(1000);
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14 | 0 << 4);
 	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
-	Sleep(1000);
-	player->showInfo();
+
+	player->showStatus();
 }
 
 void GameManager::DealDamage(Character* attacker, Character* victim)
@@ -94,8 +94,6 @@ void GameManager::DealDamage(Character* attacker, Character* victim)
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
 		cout << attacker->getName() << "이(가) " << victim->getName() << "에게 강력한 공격을 선사합니다!!!" << endl;
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
-		Sleep(1000);
 		damage *= 2;
 	}
 	//반사
