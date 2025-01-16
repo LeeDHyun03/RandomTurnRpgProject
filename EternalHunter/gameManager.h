@@ -22,6 +22,7 @@ public:
 	vector<Shop*> shops = { new NormalShop({new HealthPotion, new DamageBoost}), new HiddenShop({new HealthPotion, new DamageBoost}) };
 	vector<UseItem*> activateItems;
 	Player* player;
+	bool isBattle = true;
 	GameManager();
 	~GameManager();
 

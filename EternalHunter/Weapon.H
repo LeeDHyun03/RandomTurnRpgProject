@@ -18,8 +18,10 @@ public:
 
 
 	int getDamageAmount() { return damageAmount; }
-	void setDamageAmount(int damageAmount) { this->damageAmount += damageAmount; }
+	void setDamageAmount(int damageAmount) { this->damageAmount = damageAmount; }
 	void enforce(int amount);
+
+	void breakWeapon();
 	
 	bool tryToEnforce(int amount);
 	

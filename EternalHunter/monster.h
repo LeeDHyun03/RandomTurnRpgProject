@@ -6,7 +6,6 @@ class Monster : public Character
 {
 public:
 	Monster(string name, int level);
-
 	void firstShowInfo() override;
 	void showInfo() override;
 };
