@@ -19,9 +19,13 @@ private:
 	int damage;
 	int weaponDamage = 0;
 	bool isDamageBoost = false;
+	int criticalProb;
+	int evasionProb;
+	int halfEvasionProb;
+
 public:
 	Character();
-	Character(string name, int health, int maxHealth, int damage);
+	Character(string name, int health, int maxHealth, int damage, int criticalProb, int evasionProb, int halfEvasionProb);
 	virtual ~Character();
 	string getName();
 	void setName(string name);

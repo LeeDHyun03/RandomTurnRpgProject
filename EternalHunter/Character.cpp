@@ -1,7 +1,8 @@
 #include "character.h"
 
-Character::Character() : name("Unnamed"), sound("undefined"), health(100), maxHealth(100), damage(10) {}
-Character::Character(string name, int health, int maxHealth, int damage) : name(name), health(health), maxHealth(maxHealth), damage(damage) {}
+Character::Character() : name("Unnamed"), sound("undefined"), health(100), maxHealth(100), damage(10), criticalProb(20), evasionProb(10), halfEvasionProb(10) {}
+Character::Character(string name, int health, int maxHealth, int damage, int criticalProb, int evasionProb, int halfEvasionProb) 
+	: name(name), health(health), maxHealth(maxHealth), damage(damage), criticalProb(criticalProb), evasionProb(evasionProb), halfEvasionProb(halfEvasionProb) {}
 Character::~Character() {}
 string Character::getName() { return this->name; }
 void Character::setName(string name) { this->name = name; }
