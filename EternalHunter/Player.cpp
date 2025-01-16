@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Player::Player() :Character("Player", 200, 200, 5), level(1), xp(0), gold(0) {}  // 인벤토리 초기화
+Player::Player() :Character("Player", 50, 50, 15, 20, 10, 10), level(1), xp(0), gold(0) {}  // 인벤토리 초기화
 
 Player::~Player() {}
 
@@ -24,6 +24,8 @@ void Player::levelUP() //레벨업
 		setMaxHealth(getMaxHealth() + level * 20);
 		setHealth(getMaxHealth());
 		setDamage(getDamage() + level * 5);
+		cout << "\nLevel Up!!! 성장하셨습니다!!\n";
+		cout << "최대 HP: " << getMaxHealth() << "   " << "공격력: " << getDamage() << endl;
 		level++;
 	}
 }
@@ -58,7 +60,7 @@ void Player::showInfo() //캐릭터 스팩
 	cout << "-----------------------------------------------------------------------" << endl;
 	cout << "캐릭터 상태: " << endl;
 	cout << "이름: " << this->getName() << ", 레벨: " << this->getLevel() << ", 체력: " << this->getHealth() << "/" << this->getMaxHealth()
-		<< ", 공격력: " << this->getDamage() << ", 경험치: " << this->getXp() << ", 골드: " << this->getGold() << endl;
+		<< ", 공격력: " << this->getDamage()+this->getWeaponDamage() << ", 경험치: " << this->getXp() << ", 골드: " << this->getGold() << endl;
 	cout << "-----------------------------------------------------------------------" << endl;
 }
 
@@ -66,18 +68,18 @@ void Player::showInfoBattle()
 {
 	cout << "캐릭터 상태: " << endl;
 	cout <<  " 체력: " << this->getHealth() << "/" << this->getMaxHealth()
-		<< " 공격력: " << this->getDamage() << endl;
+		<< " 공격력: " << this->getDamage()+this->getWeaponDamage() << endl;
 }
 
-Weapon* Player::getWeapon() { return myWeapon; }
+Weapon* Player::getWeapon() { return &myWeapon; }
 
 void Player::applyDamage()
 {
-	modifyDamage(myWeapon->getDamageAmount());
+	setWeaponDamage(myWeapon.getDamageAmount());
 }
 
 
-void Player::addItemToInventory(Item* item) {
+void Player::addItemToInventory(UseItem* item) {
 	inventory.addItem(item);  // 인벤토리에 아이템 추가
 }
 

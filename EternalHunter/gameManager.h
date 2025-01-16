@@ -3,12 +3,12 @@
 #include "Player.h"
 #include "Shop.h"
 #include "customlib.h"
+#include "useItem.h"
 #include <vector>
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-
 using namespace std;
 
 
@@ -20,7 +20,9 @@ private:
 public:
 	vector<Monster*> monsters;
 	vector<Shop*> shops = { new NormalShop({new HealthPotion, new DamageBoost}), new HiddenShop({new HealthPotion, new DamageBoost}) };
+	vector<UseItem*> activateItems;
 	Player* player;
+	bool isBattle = true;
 	GameManager();
 	~GameManager();
 
@@ -29,14 +31,18 @@ public:
 	void UsingItemWithProbability(int probability, Character* character);
 	void IsPlayerWinAtCombat();
 	bool isDieCheck(Monster* monster);
-	void  SetResultAfterCombat(Monster* monster);
+	void  SetResultAfterCombat();
 
-	void DealDamage(Character* attacker, Character* victim);
+	bool DealDamage(Character* attacker, Character* victim, Monster* monster);
 	void VisitAtShop();
 
+	void DeactivateItem();
 
-
+	bool KillDragon(Monster*monster);
 	void Defeat();
+	
 
 	void StartGame();
+	void EndGame();
+	void PlaySimpleSound();
 };

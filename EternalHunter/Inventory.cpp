@@ -10,13 +10,13 @@ Inventory::~Inventory() {
     }
 }
 
-void Inventory::addItem(Item* item) {
+void Inventory::addItem(UseItem* item) {
     items.push_back(item);  // 아이템을 벡터에 추가
 }
 
 void Inventory::removeItem(int index) {
     if (index >= 0 && index < items.size()) {
-        delete items[index];  // 아이템 메모리 해제
+        items[index]->PoolItem();
         items.erase(items.begin() + index);  // 인덱스에 해당하는 아이템 제거
     }
 }
@@ -32,7 +32,7 @@ void Inventory::showItems() const {
     }
 }
 
-Item* Inventory::getItem(int index) const {
+UseItem* Inventory::getItem(int index) const {
     if (index >= 0 && index < items.size()) {
         return items[index];
     }

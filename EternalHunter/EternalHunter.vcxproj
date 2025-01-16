@@ -29,6 +29,7 @@
     <ClCompile Include="music.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="shop.cpp" />
+    <ClCompile Include="useItem.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +42,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="shop.h" />
+    <ClInclude Include="useItem.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

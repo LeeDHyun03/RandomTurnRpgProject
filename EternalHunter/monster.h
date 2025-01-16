@@ -5,8 +5,7 @@ using namespace std;
 class Monster : public Character
 {
 public:
-	Monster(string name, int level);
-
+	Monster(string name, int level, int criticalProb, int evasionProb, int halfEvasionProb);
 	void firstShowInfo() override;
 	void showInfo() override;
 };
@@ -35,11 +34,8 @@ public:
 	Slime(int level);
 };
 
-class Dragon : public Character
+class Dragon : public Monster
 {
 public:
-	Dragon(string name, int level, vector<Item*> itemList);
-
-	void firstShowInfo() override;
-	void showInfo() override;
+	Dragon(int level);
 };

@@ -15,7 +15,7 @@ private:
 	const int maxXp = 100;
 	int gold;
 	Inventory inventory;
-	Weapon* myWeapon = new Weapon();
+	Weapon myWeapon;
 public:
 	Player();
 
@@ -39,7 +39,7 @@ public:
 	void applyDamage();
 
 	// 인벤토리 관련 메소드
-	void addItemToInventory(Item* item);
+	void addItemToInventory(UseItem* item);
 	void removeItemFromInventory(int index);
 	void showInventory() const;
 

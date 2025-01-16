@@ -1,6 +1,0 @@
-﻿  music.cpp
-C:\Users\a3749\RandomTurnRpgProject\EternalHunter\music.cpp(31,17): warning C4477: 'scanf_s' : 서식 문자열 '%s'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'size_t'입니다.
-      C:\Users\a3749\RandomTurnRpgProject\EternalHunter\music.cpp(31,17):
-      이 인수는 버퍼 크기로 사용됩니다.
-  
-LINK : fatal error LNK1104: 'winuser.lib' 파일을 열 수 없습니다.

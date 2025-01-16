@@ -1,8 +1,10 @@
 #pragma once
 #include "shop.h"
+#include <thread>
+#include <chrono>
 Shop::Shop() {}
-Shop::Shop(string name, vector<Item*> itemlist) : shopName(name), itemList(itemlist) {}
-vector<Item*> itemList = { new HealthPotion, new DamageBoost };
+Shop::Shop(string name, vector<UseItem*> itemlist) : shopName(name), itemList(itemlist) {}
+vector<UseItem*> itemList = { new HealthPotion, new DamageBoost };
 Shop::~Shop()
 {
 	for (int i = 0; i < itemList.size(); i++)
@@ -18,6 +20,13 @@ void Shop::Shopping(Player* player)
 
 	int succesProb = 0;
 	int destroyProb = 0;
+
+	this_thread::sleep_for(chrono::milliseconds(500));
+	cout << ".\n" << endl;
+	cout << ".\n" << endl;
+	cout << ".\n" << endl;
+	this_thread::sleep_for(chrono::milliseconds(1200));
+
 	cout << shopName << "에 방문했습니다.\n";
 	while (true)
 	{
@@ -101,15 +110,15 @@ void Shop::Shopping(Player* player)
 			if (succesProb == destroyProb || succesProb == choice)
 			{
 				player->getWeapon()->enforce(1);
-				cout << "asdf";
 				cout << "강화 성공!! 현재 강화 수치 : " << player->getWeapon()->getStack() << endl;
 				player->applyDamage();
+				cout << "무기 데미지" << player->getWeaponDamage();
 			}
 			else if (destroyProb == choice)
 			{
 				cout << "강화에 실패하여 장비가 파괴되었습니다." << endl;
 				player->getWeapon()->setName("무기였던 것");  // 강화 실패 시 무기 이름 변경
-				player->getWeapon()->setDamageAmount(0);  // 강화 실패 시 무기 데미지 0으로 설정
+				player->getWeapon()->breakWeapon();  // 강화 실패 시 무기 데미지 0으로 설정
 				cout << "무기 이름 : " << player->getWeapon()->getName() << "       무기 데미지 : " << player->getWeapon()->getDamageAmount() << endl;
 				player->applyDamage();
 			}
@@ -120,10 +129,15 @@ void Shop::Shopping(Player* player)
 			
 			break;
 		case 4:
-			cout << "\n";
+			this_thread::sleep_for(chrono::milliseconds(500));
+			cout << ".\n" << endl;
+			cout << ".\n" << endl;
+			cout << ".\n" << endl;
+			this_thread::sleep_for(chrono::milliseconds(500));
 			cout << "상점을 나왔습니다.." << endl;
 			cout << "-----------------------------------------------------------------------\n";
 			cout << "-----------------------------------------------------------------------\n";
+			this_thread::sleep_for(chrono::milliseconds(1200));
 			return;
 		default:
 			cout << "숫자를 잘못 입력하셨습니다.\n";
@@ -149,11 +163,10 @@ void Shop::BuyItem(Player* player, int index)
 	// 아이템 구매가 가능한지 확인
 	if (player->getGold() >= itemList[index]->getPrice())
 	{
-		Item* item = itemList[index];
+		UseItem* item = itemList[index];
 		cout << item->getName() << "을(를) 구매했습니다.\n";
 		player->modifyGold(-item->getPrice());  // 골드 차감
 		cout << "현재 잔액: " << player->getGold() << " 골드\n";
-
 		// 아이템을 플레이어 인벤토리에 추가
 		player->addItemToInventory(item);
 	}
@@ -170,8 +183,10 @@ void Shop::SellItem(Player* player, int index)
 	if (index >= 0 && index < player->getInventory().getSize()) {
 		Item* itemToSell = player->getInventory().getItem(index);
 		cout << itemToSell->getName() << "을(를) 팔고 " << itemToSell->getPrice() << "골드를 얻었습니다.\n";
-		player->modifyGold(itemToSell->getPrice());  // 골드 증가
-		player->removeItemFromInventory(index);  // 아이템 판매 후 인벤토리에서 제거
+		// 골드 증가
+		player->modifyGold(itemToSell->getPrice());  
+		// 아이템 판매 후 인벤토리에서 제거
+		player->removeItemFromInventory(index);  
 	}
 	else {
 		cout << "잘못된 아이템 인덱스입니다.\n";
