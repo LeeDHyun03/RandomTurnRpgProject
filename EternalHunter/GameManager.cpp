@@ -66,6 +66,7 @@ bool GameManager::isDieCheck(Monster* monster)
 {
 	if (monster->getHealth() <= 0)
 	{
+		cout << "\n" << monster->getlastWord() << "\n" << endl;
 		cout << monster->getName() << "À»(¸¦) " << "¾²·¯¶ß·È½À´Ï´Ù!!" << endl << endl;
 		SetResultAfterCombat(monster);
 		return true;

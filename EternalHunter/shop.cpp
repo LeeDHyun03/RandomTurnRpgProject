@@ -1,5 +1,7 @@
 #pragma once
 #include "shop.h"
+#include <thread>
+#include <chrono>
 Shop::Shop() {}
 Shop::Shop(string name, vector<UseItem*> itemlist) : shopName(name), itemList(itemlist) {}
 vector<UseItem*> itemList = { new HealthPotion, new DamageBoost };
@@ -18,6 +20,13 @@ void Shop::Shopping(Player* player)
 
 	int succesProb = 0;
 	int destroyProb = 0;
+
+	this_thread::sleep_for(chrono::milliseconds(500));
+	cout << ".\n" << endl;
+	cout << ".\n" << endl;
+	cout << ".\n" << endl;
+	this_thread::sleep_for(chrono::milliseconds(1200));
+
 	cout << shopName << "에 방문했습니다.\n";
 	while (true)
 	{
@@ -120,10 +129,15 @@ void Shop::Shopping(Player* player)
 			
 			break;
 		case 4:
-			cout << "\n";
+			this_thread::sleep_for(chrono::milliseconds(500));
+			cout << ".\n" << endl;
+			cout << ".\n" << endl;
+			cout << ".\n" << endl;
+			this_thread::sleep_for(chrono::milliseconds(500));
 			cout << "상점을 나왔습니다.." << endl;
 			cout << "-----------------------------------------------------------------------\n";
 			cout << "-----------------------------------------------------------------------\n";
+			this_thread::sleep_for(chrono::milliseconds(1200));
 			return;
 		default:
 			cout << "숫자를 잘못 입력하셨습니다.\n";
