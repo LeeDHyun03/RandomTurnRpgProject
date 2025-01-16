@@ -72,3 +72,31 @@ public:
 	virtual void itemUse(Character* character);
 	virtual void DeactivateItem(Character* character);
 };
+
+
+
+class WorldMostWeapon : public UseItem
+{
+public:
+	virtual UseItem* clone() const override {
+		return new WorldMostWeapon(*this);  // 현재 객체의 복사본 반환
+	}
+
+	WorldMostWeapon();  // 생성자 선언
+
+	virtual void itemUse(Character* character) ;  // 아이템 사용
+	virtual void DeactivateItem(Character* character) ;  // 아이템 비활성화
+};
+
+class MiddleWeapon : public UseItem
+{
+public:
+	virtual UseItem* clone() const override {
+		return new MiddleWeapon(*this);  // 현재 객체의 복사본 반환
+	}
+
+	MiddleWeapon();  // 생성자 선언
+
+	virtual void itemUse(Character* character) ;  // 아이템 사용
+	virtual void DeactivateItem(Character* character) ;  // 아이템 비활성화
+};

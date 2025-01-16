@@ -216,20 +216,36 @@ void Shop::BuyItem(Player* player, int index)
 }
 
 
-
 void Shop::SellItem(Player* player, int index)
 {
 	if (index >= 0 && index < player->getInventory().getSize()) {
 		Item* itemToSell = player->getInventory().getItem(index);
-		Sleep(300);
-		cout << "\n" << itemToSell->getName() << "을(를) 팔고 " << itemToSell->getPrice() << "골드를 얻었습니다.\n";
-		// 골드 증가
-		player->modifyGold(itemToSell->getPrice());  
-		// 아이템 판매 후 인벤토리에서 제거
-		player->removeItemFromInventory(index);  
-		Sleep(300);
+		// 아이템의 원래 가격을 가져와서 60%로 계산
+		int sellPrice = itemToSell->getPrice() * 0.6;
+		cout << itemToSell->getName() << "을(를) 팔고 " << sellPrice << "골드를 얻었습니다.\n";
+		player->modifyGold(sellPrice);  // 골드 증가
+		player->removeItemFromInventory(index);  // 아이템 판매 후 인벤토리에서 제거
+		cout << "현재 잔액: " << player->getGold() << " 골드\n";
 	}
 	else {
 		cout << "잘못된 아이템 인덱스입니다.\n";
+	}
+}
+
+HiddenShop::HiddenShop(vector<UseItem*> itemList) : Shop("Hidden Shop", itemList) {}
+
+void HiddenShop::ShowHiddenShop(Player* player) {
+	int index;
+	cout << "숨겨진 상점에서 판매하는 아이템:" << endl;
+	ShowItemlist();  // 히든 상점의 아이템 목록을 출력합니다.
+
+	cout << "구매할 아이템 번호를 입력하세요: ";
+	cin >> index;
+
+	if (index > 0 && index <= itemList.size()) {
+		BuyItem(player, index - 1);
+	}
+	else {
+		cout << "잘못된 아이템 번호입니다." << endl;
 	}
 }

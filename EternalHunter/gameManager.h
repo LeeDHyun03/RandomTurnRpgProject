@@ -11,38 +11,38 @@
 #include <windows.h>
 using namespace std;
 
-
-
-class GameManager
-{
+class GameManager {
 private:
-	string input = string();
+    string input = string();
 public:
-	vector<Monster*> monsters;
-	vector<Shop*> shops = { new NormalShop({new HealthPotion, new DamageBoost, new StunGun}), new HiddenShop({new HealthPotion, new DamageBoost, new StunGun}) };
-	vector<UseItem*> activateItems;
-	Player* player;
-	bool isBattle = true;
-	GameManager();
-	~GameManager();
+    vector<Monster*> monsters;
+    vector<Shop*> shops = { new NormalShop({new HealthPotion(), new DamageBoost(), new StunGun}),
+                            new HiddenShop({ new WorldMostWeapon(), new MiddleWeapon() }) };
+    vector<UseItem*> activateItems;
+    Player* player;
+    bool isBattle = true;
 
-	void SetMonsters(int level);
+    GameManager();
+    ~GameManager();
+
+    void SetMonsters(int level);
 
 	void UsingItemWithProbability(int probability, Character* playerChar, Character* monster);
 	void IsPlayerWinAtCombat();
 	bool isDieCheck(Monster* monster);
 	void  SetResultAfterCombat(Monster* monster);
 
-	bool DealDamage(Character* attacker, Character* victim, Monster* monster);
-	void VisitAtShop();
+    bool DealDamage(Character* attacker, Character* victim, Monster* monster);
+    void VisitAtShop();
 
 	void DeactivateItem(Monster* monster);
 
-	bool KillDragon(Monster*monster);
-	void Defeat();
-	
+    void Defeat();
 
-	void StartGame();
-	void EndGame();
-	void PlaySimpleSound();
+    void StartGame();
+
+    bool KillDragon(Monster* monster);
+
+
+    void EndGame();
 };
