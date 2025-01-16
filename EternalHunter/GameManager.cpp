@@ -99,7 +99,7 @@ bool GameManager::isDieCheck(Monster* monster)
 		else
 		{
 			cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
-			SetResultAfterCombat(monster);
+			SetResultAfterCombat();
 			return true;
 		}
 	}
@@ -134,7 +134,7 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 {
 	int damage = attacker->getCharacterDamage();
 	//크리티컬 확률
-	if (ProbabilityCheck(10))
+	if (ProbabilityCheck(attacker->getCriticalProb()))
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
 		cout << attacker->getName() << "이(가) " << victim->getName() << "에게 강력한 공격을 선사합니다!!!" << endl;
@@ -154,19 +154,19 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 		cout << "만큼 데미지를 입혔습니다!!" << endl;
 		cout << "대단하군요!!!\n\n";
 		attacker->takeDamage(damage);
-		return;
+		return false;
 	}
 	else
 	{
 		//방어자의 회피
-		if (ProbabilityCheck(10))
+		if (ProbabilityCheck(victim->getEvasionProb()))
 		{
 			cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 피했습니다!!" << endl;
 		}
 		else
 		{
 			//반감
-			if (ProbabilityCheck(10))
+			if (ProbabilityCheck(victim->getHalfEvasionProb()))
 			{
 				cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 빗겨나갔습니다!!" << endl;
 				damage /= 2;
