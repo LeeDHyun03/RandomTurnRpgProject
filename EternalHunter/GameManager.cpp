@@ -51,12 +51,10 @@ void GameManager::IsPlayerWinAtCombat()
 	{
 		DeactivateItem();
 		Sleep(10);
-		DealDamage(player, monster);
+		if(DealDamage(player, monster, monster)) return;
 		Sleep(10);
-		if (isDieCheck(monster)) return;
-		DealDamage(monster, player);
+		if(DealDamage(monster, player, monster)) return;
 		Sleep(10);
-		if (isDieCheck(monster)) return;
 		UsingItemWithProbability(100, player);
 		monster->showInfo();
 		player->showInfoBattle();
@@ -69,7 +67,7 @@ bool GameManager::isDieCheck(Monster* monster)
 	{
 		cout << "\n" << monster->getlastWord() << "\n" << endl;
 		cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
-		SetResultAfterCombat(monster);
+		SetResultAfterCombat();
 		return true;
 	}
 	if (player->getHealth() <= 0)
@@ -80,7 +78,7 @@ bool GameManager::isDieCheck(Monster* monster)
 	}
 	return false;
 }
-void  GameManager::SetResultAfterCombat(Monster* monster)
+void  GameManager::SetResultAfterCombat()
 {
 	isBattle = false;
 	DeactivateItem();
@@ -99,7 +97,7 @@ void  GameManager::SetResultAfterCombat(Monster* monster)
 	player->showInfo();
 }
 
-void GameManager::DealDamage(Character* attacker, Character* victim)
+bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* monster)
 {
 	int damage = attacker->getCharacterDamage();
 	//크리티컬 확률
@@ -148,6 +146,7 @@ void GameManager::DealDamage(Character* attacker, Character* victim)
 			cout << "만큼 데미지를 입혔습니다!!\n" << endl;
 		}
 	}
+	return isDieCheck(monster);
 }
 
 void GameManager::VisitAtShop()

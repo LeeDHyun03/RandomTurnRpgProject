@@ -31,9 +31,9 @@ public:
 	void UsingItemWithProbability(int probability, Character* character);
 	void IsPlayerWinAtCombat();
 	bool isDieCheck(Monster* monster);
-	void  SetResultAfterCombat(Monster* monster);
+	void  SetResultAfterCombat();
 
-	void DealDamage(Character* attacker, Character* victim);
+	bool DealDamage(Character* attacker, Character* victim, Monster* monster);
 	void VisitAtShop();
 
 	void DeactivateItem();

@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Monster::Monster(string name, int level) //몬스터 기본 생성자
-	: Character(name, level* randomInRange(20, 30), level* randomInRange(20, 30), level* randomInRange(5, 10)) {}
+Monster::Monster(string name, int level, int criticalProb, int evasionProb, int halfEvasionProb) //몬스터 기본 생성자
+	: Character(name, level* randomInRange(20, 30), level* randomInRange(20, 30), level* randomInRange(5, 10), criticalProb, evasionProb, halfEvasionProb) { }
 
 void Monster::firstShowInfo() //몬스터 등장 정보
 {
@@ -22,35 +22,35 @@ void Monster::showInfo() //몬스터 정보
 }
 
 Goblin::Goblin(int level)
-	: Monster("Goblin", level)
+	: Monster("Goblin", level, 10, 60, 40)
 {
 	setSound("Hehehe!!");
 	setlastWord("You'll regret this, big guy!");
 }
 
 Orc::Orc(int level) 
-	: Monster("Orc", level)
+	: Monster("Orc", level, 60, 10, 0)
 {
 	setSound("Grrrrrrrr!!");
 	setlastWord("I' ll... be back!");
 }
 
 Troll::Troll(int level) 
-	: Monster("Troll", level)
+	: Monster("Troll", level, 60, 20, 10)
 {
 	setSound("Raaaaagh!!!");
 	setlastWord("Trolls never die...!");
 }
 
 Slime::Slime(int level) 
-	: Monster("Slime", level)
+	: Monster("Slime", level, 0, 40, 100)
 {
 	setSound("Blub blub....");
 	setlastWord("Glorp... glorp...");
 }
 
 Dragon::Dragon(string name, int level, vector<Item*> itemList) //보스몬스터
-	: Character(name, level* randomInRange(20, 30 * 1.5f), level* randomInRange(20, 30 * 1.5f), level* randomInRange(5, 10 * 1.5f)) {}
+	: Character(name, level* randomInRange(20, 30 * 1.5f), level* randomInRange(20, 30 * 1.5f), level* randomInRange(5, 10 * 1.5f), 90, 50, 80) {}
 
 void Dragon::firstShowInfo()
 {

@@ -50,7 +50,6 @@ public:
 
 	int getCharacterDamage();
 
-	void useItem(Item* item);
 	
 	bool getIsDamageBoost();
 	void setIsDamageBoost(bool isDamageBoost);
