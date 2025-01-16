@@ -18,11 +18,10 @@ private:
 	int maxHealth;
 	int damage;
 	int weaponDamage = 0;
-	bool isDamageBoost = false;
 	int criticalProb;
 	int evasionProb;
 	int halfEvasionProb;
-
+	bool isStun = false;
 public:
 	Character();
 	Character(string name, int health, int maxHealth, int damage, int criticalProb, int evasionProb, int halfEvasionProb);
@@ -50,9 +49,9 @@ public:
 
 	int getCharacterDamage();
 
-	
-	bool getIsDamageBoost();
-	void setIsDamageBoost(bool isDamageBoost);
+
+	bool getIsStun() { return isStun; };
+	void setIsStun(bool isStun) { this->isStun = isStun; }
 
 	int getCriticalProb() { return criticalProb; }
 	int getEvasionProb() { return evasionProb; }

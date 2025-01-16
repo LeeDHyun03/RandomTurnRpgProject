@@ -1,9 +1,10 @@
 #pragma once
 #include "player.h"
 #include "item.h"
-#include "useItem.h"
 #include "customlib.h"
+#include <windows.h>
 
+class UseItem;
 using namespace std;
 class Shop
 {
@@ -12,7 +13,7 @@ private:
 public:
 	Shop();
 	Shop(string name, vector<UseItem*> itemlist);
-	vector<UseItem*> itemList = {new HealthPotion, new DamageBoost };
+	vector<UseItem*> itemList = {new HealthPotion, new DamageBoost, new StunGun };
 	virtual ~Shop();
 	string getShopName();
 

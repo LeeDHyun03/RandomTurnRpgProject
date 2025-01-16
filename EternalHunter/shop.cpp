@@ -4,7 +4,7 @@
 #include <chrono>
 Shop::Shop() {}
 Shop::Shop(string name, vector<UseItem*> itemlist) : shopName(name), itemList(itemlist) {}
-vector<UseItem*> itemList = { new HealthPotion, new DamageBoost };
+vector<UseItem*> itemList = { new HealthPotion, new DamageBoost, new StunGun };
 Shop::~Shop()
 {
 	for (int i = 0; i < itemList.size(); i++)
@@ -23,21 +23,35 @@ void Shop::Shopping(Player* player)
 
 	this_thread::sleep_for(chrono::milliseconds(500));
 	cout << ".\n" << endl;
+	Sleep(1000);
 	cout << ".\n" << endl;
+	Sleep(1000);
 	cout << ".\n" << endl;
+	Sleep(1000);
 	this_thread::sleep_for(chrono::milliseconds(1200));
-
+	
 	cout << shopName << "에 방문했습니다.\n";
+	Sleep(500);
+
+	system("cls");
 	while (true)
 	{
 		int index = 0;
-
-		cout << "-----------------------------------------------------------------------\n";
+		player->showInfo();
+		Sleep(300);
+		cout << "\n-----------------------------------------------------------------------\n";
+		cout << shopName << "에 방문했습니다.\n";
 		cout << "-----------------------------------------------------------------------\n\n";
+		Sleep(300);
 		cout << "1번 : 아이템 구매하기\n";
+		Sleep(300);
 		cout << "2번 : 아이템 판매하기\n";
+		Sleep(300);
 		cout << "3번 : 무기 강화하기\n";
+		Sleep(300);
 		cout << "4번 : 상점 나가기\n";
+		Sleep(300);
+		cout << "번호: ";
 		cin >> index;
 		if (!cin)
 		{
@@ -47,48 +61,62 @@ void Shop::Shopping(Player* player)
 		switch (index)
 		{
 		case 1:
+			system("cls");
+			player->showInfo();
 			cout << "\n-----------------------------------------------------------------------\n";
 			cout << "-----------------------------------------------------------------------\n";
 			cout << "판매 목록 확인\n";
+			Sleep(300);
 			ShowItemlist();
 			cout << "-----------------------------------------------------------------------\n";
 			cout << "\n";
 			while (true)
 			{
-				cout << "구매할 아이템 인덱스를 입력해주세요:  ";
+				cout << "구매할 아이템 번호를 입력해주세요. 구매할 아이템이 없으신 경우 아무키를 눌러 상점화면으로 돌아가실 수 있습니다.\n";
+				cout << "아이템 번호: ";
 				cin >> index;
-				if (index < itemList.size())
+				if (index - 1 < itemList.size())
 				{
-					BuyItem(player, index);
+					BuyItem(player, index - 1);
 					break;
 				}
 				else
 				{
-					cout << "\n목록에 있는 거만 사주세요\n";
+					cout << "\n상점으로 돌아갑니다.\n";
+					break;
 				}
 			}
 			break;
 		case 2:
+			system("cls");
+			player->showInfo();
 			while (true)
 			{
 				cout << "\n-----------------------------------------------------------------------\n";
 				cout << "-----------------------------------------------------------------------\n";
+				cout << "소지 아이템 목록 확인\n";
 				ShowPlayerItemList(player);
-				cout << "판매할 아이템 인덱스를 입력해주세요\n";
+				cout << "-----------------------------------------------------------------------\n";
+				cout << "판매할 아이템 번호를 입력해주세요. 판매할 아이템이 없으신 경우 아무키를 눌러 상점화면으로 돌아가실 수 있습니다.\n";
+				cout << "아이템 번호: ";
 				cin >> index;
-				if (index < player->getInventory().getSize())
+				if (index - 1 < player->getInventory().getSize())
 				{
-					SellItem(player, index);
+					SellItem(player, index - 1);
 					break;
 				}
 				else
 				{
-					cout << "없는 거 팔지 마세요\n";
+					cin.clear();
+					cin.ignore(INT_MAX, '\n');
+					cout << "\n상점으로 돌아갑니다.\n";
 					break;
 				}
 			}
 			break;
 		case 3:
+			system("cls");
+			player->showInfo();
 			cout << "\n-----------------------------------------------------------------------\n";
 			cout << "-----------------------------------------------------------------------\n";
 			cout << "무기를 강화합니다." << endl;
@@ -112,7 +140,7 @@ void Shop::Shopping(Player* player)
 				player->getWeapon()->enforce(1);
 				cout << "강화 성공!! 현재 강화 수치 : " << player->getWeapon()->getStack() << endl;
 				player->applyDamage();
-				cout << "무기 데미지" << player->getWeaponDamage();
+				cout << "\n무기 데미지" << player->getWeaponDamage() << endl;
 			}
 			else if (destroyProb == choice)
 			{
@@ -129,15 +157,21 @@ void Shop::Shopping(Player* player)
 			
 			break;
 		case 4:
+
 			this_thread::sleep_for(chrono::milliseconds(500));
 			cout << ".\n" << endl;
+			Sleep(1000);
 			cout << ".\n" << endl;
+			Sleep(1000);
 			cout << ".\n" << endl;
-			this_thread::sleep_for(chrono::milliseconds(500));
+			Sleep(1000);
+			this_thread::sleep_for(chrono::milliseconds(1200));
 			cout << "상점을 나왔습니다.." << endl;
 			cout << "-----------------------------------------------------------------------\n";
 			cout << "-----------------------------------------------------------------------\n";
 			this_thread::sleep_for(chrono::milliseconds(1200));
+			system("cls");
+			player->showInfo();
 			return;
 		default:
 			cout << "숫자를 잘못 입력하셨습니다.\n";
@@ -150,7 +184,7 @@ void Shop::ShowItemlist()
 {
 	for (int i = 0; i < itemList.size(); i++)
 	{
-		cout << i << ":" << itemList[i]->getName() << "              가격 : " << itemList[i]->getPrice() << endl;
+		cout << i + 1 << ":" << itemList[i]->getName() << "              가격 : " << itemList[i]->getPrice() << endl;
 	}
 }
 void Shop::ShowPlayerItemList(Player* player) {
@@ -164,15 +198,20 @@ void Shop::BuyItem(Player* player, int index)
 	if (player->getGold() >= itemList[index]->getPrice())
 	{
 		UseItem* item = itemList[index];
-		cout << item->getName() << "을(를) 구매했습니다.\n";
+		Sleep(300);
+		cout << "\n" << item->getName() << "을(를) 구매했습니다.\n";
 		player->modifyGold(-item->getPrice());  // 골드 차감
+		Sleep(300);
 		cout << "현재 잔액: " << player->getGold() << " 골드\n";
 		// 아이템을 플레이어 인벤토리에 추가
 		player->addItemToInventory(item);
+		Sleep(300);
 	}
 	else
 	{
+		Sleep(300);
 		cout << "돈이 모자라서 구매할 수 없습니다.\n";
+		Sleep(300);
 	}
 }
 
@@ -182,11 +221,13 @@ void Shop::SellItem(Player* player, int index)
 {
 	if (index >= 0 && index < player->getInventory().getSize()) {
 		Item* itemToSell = player->getInventory().getItem(index);
-		cout << itemToSell->getName() << "을(를) 팔고 " << itemToSell->getPrice() << "골드를 얻었습니다.\n";
+		Sleep(300);
+		cout << "\n" << itemToSell->getName() << "을(를) 팔고 " << itemToSell->getPrice() << "골드를 얻었습니다.\n";
 		// 골드 증가
 		player->modifyGold(itemToSell->getPrice());  
 		// 아이템 판매 후 인벤토리에서 제거
 		player->removeItemFromInventory(index);  
+		Sleep(300);
 	}
 	else {
 		cout << "잘못된 아이템 인덱스입니다.\n";

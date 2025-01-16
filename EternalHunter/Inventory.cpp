@@ -27,7 +27,7 @@ void Inventory::showItems() const {
     }
     else {
         for (int i = 0; i < items.size(); i++) {
-            std::cout << i << ": " << items[i]->getName() << " (°¡°Ý: " << items[i]->getPrice() << "°ñµå)\n";
+            std::cout << i + 1 << ": " << items[i]->getName() << " (°¡°Ý: " << items[i]->getPrice() << "°ñµå)\n";
         }
     }
 }

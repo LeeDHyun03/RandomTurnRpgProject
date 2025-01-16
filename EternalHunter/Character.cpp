@@ -32,8 +32,6 @@ void Character::showInfo()
 	cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
 
 }
-bool Character::getIsDamageBoost() { return isDamageBoost; }
-void Character::setIsDamageBoost(bool isDamageBoost) {	this->isDamageBoost = isDamageBoost;  }
 
 void Character::firstShowInfo()
 {

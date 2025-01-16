@@ -27,7 +27,7 @@ void GameManager::SetMonsters(int level)
 	}
 }
 
-void GameManager::UsingItemWithProbability(int probability, Character* character)
+void GameManager::UsingItemWithProbability(int probability, Character* playerChar, Character* monster)
 {
 	if (ProbabilityCheck(probability))
 	{
@@ -38,9 +38,27 @@ void GameManager::UsingItemWithProbability(int probability, Character* character
 		int i = player->getInventory().getSize();
 		int index = randomInRange(0, i - 1);
 		UseItem* randomItem = player->getInventory().getItem(index);
-		randomItem->itemUse(character);
-		if (randomItem->getIsActivate()) activateItems.push_back(randomItem->clone());
+		for (int j = 0; j < i; j++)
+		{
+			if (activateItems.empty()) break;
+			if (randomItem->getName() == activateItems[j]->getName())
+			{
+				activateItems[j]->modifyAcitvateTurn(activateItems[j]->getActivateTurn());
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10 | 0 << 4);
+				cout << randomItem->getName() << "지속턴 증가!" << endl;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
+				player->removeItemFromInventory(index);
+				return;
+			}
+		}
+		if(randomItem->getPlayerTarget())randomItem->itemUse(playerChar);
+		else randomItem->itemUse(monster);
+		if (randomItem->getIsActivate())
+			activateItems.push_back(randomItem->clone());
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10 | 0 << 4);
 		cout << "아이템" << randomItem->getName() << "사용!" << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 
 		player->removeItemFromInventory(index);
 
@@ -55,15 +73,15 @@ void GameManager::IsPlayerWinAtCombat()
 	monster->firstShowInfo();
 	while (true)
 	{
-		DeactivateItem();
+		DeactivateItem(monster);
+		monster->showInfo();
+		player->showInfoBattle();
 		Sleep(10);
 		if(DealDamage(player, monster, monster)) return;
 		Sleep(10);
 		if(DealDamage(monster, player, monster)) return;
 		Sleep(10);
-		UsingItemWithProbability(100, player);
-		monster->showInfo();
-		player->showInfoBattle();
+		UsingItemWithProbability(100, player, monster);
 	}
 }
 
@@ -99,7 +117,7 @@ bool GameManager::isDieCheck(Monster* monster)
 		else
 		{
 			cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
-			SetResultAfterCombat();
+			SetResultAfterCombat(monster);
 			return true;
 		}
 	}
@@ -111,10 +129,10 @@ bool GameManager::isDieCheck(Monster* monster)
 	}
 	return false;
 }
-void  GameManager::SetResultAfterCombat()
+void  GameManager::SetResultAfterCombat(Monster* monster)
 {
 	isBattle = false;
-	DeactivateItem();
+	DeactivateItem(monster);
 	int xp = 50;
 	int gold = randomInRange(10, 20);
 	player->modifyGold(gold);
@@ -132,6 +150,11 @@ void  GameManager::SetResultAfterCombat()
 
 bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* monster)
 {
+	if (attacker->getIsStun())
+	{
+		cout << "기절 상태입니다..\n";
+		return false;
+	}
 	int damage = attacker->getCharacterDamage();
 	//크리티컬 확률
 	if (ProbabilityCheck(attacker->getCriticalProb()))
@@ -195,25 +218,36 @@ void GameManager::VisitAtShop()
 	}
 }
 
-void GameManager::DeactivateItem()
+void GameManager::DeactivateItem(Monster* monster)
 {
 	if (activateItems.empty()) return;
 	for (int i = 0; i < activateItems.size(); i++)
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13 | 0 << 4);
-		cout << "\n아이템 지속턴: " << activateItems[i]->getActivateTurn() << "|| 지속된 턴: " << activateItems[i]->getCurrentctivateTurn() << endl;
+		cout << "\n아이템: " << activateItems[i]->getName()
+			<< " 지속 턴: " << activateItems[i]->getActivateTurn()
+			<< " || 현재 지속된 턴: " << activateItems[i]->getCurrentctivateTurn() << endl;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 		if (activateItems[i]->getActivateTurn() <= activateItems[i]->getCurrentctivateTurn() || !isBattle)
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5 | 0 << 4);
 			cout << activateItems[i]->getName() << "의 사용 효과가 끝났습니다..\n\n";
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
-			activateItems[i]->DeactivateItem(player);
+
+			if (activateItems[i]->getPlayerTarget())
+				activateItems[i]->DeactivateItem(player);
+			else
+				activateItems[i]->DeactivateItem(monster);
+
+			// 아이템 풀로 돌려놓고 벡터에서 제거
 			activateItems[i]->PoolItem();
 			activateItems.erase(activateItems.begin() + i);
-			return;
+			i--;
 		}
-		activateItems[i]->modifyActivateTurn(1);
+		else
+		{
+			activateItems[i]->modifyCurrentActivateTurn(1);
+		}
 	}
 }
 
