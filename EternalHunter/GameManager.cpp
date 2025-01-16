@@ -18,13 +18,7 @@ GameManager::~GameManager()
 
 void GameManager::SetMonsters(int level)
 {
-	if (player->getLevel() == 10) {
-		this->monsters = { new Dragon(level) };
-	}
-	else
-	{
-		this->monsters = { new Goblin(level), new Orc(level), new Troll(level), new Slime(level) };
-	}
+	this->monsters = { new Goblin(level), new Orc(level), new Troll(level), new Slime(level) };
 }
 
 void GameManager::UsingItemWithProbability(int probability, Character* character)
@@ -56,52 +50,27 @@ void GameManager::IsPlayerWinAtCombat()
 	while (true)
 	{
 		DeactivateItem();
-		Sleep(10);
-		if(DealDamage(player, monster, monster)) return;
-		Sleep(10);
-		if(DealDamage(monster, player, monster)) return;
-		Sleep(10);
+		Sleep(1000);
+		DealDamage(player, monster);
+		Sleep(1000);
+		if (isDieCheck(monster)) return;
+		DealDamage(monster, player);
+		Sleep(1000);
+		if (isDieCheck(monster)) return;
 		UsingItemWithProbability(100, player);
 		monster->showInfo();
 		player->showInfoBattle();
 	}
 }
 
-bool GameManager::KillDragon(Monster* monster)
-{
-	if (dynamic_cast<Dragon*>(monster) != nullptr && monster->getHealth() <= 0)
-	{
-		cout << "꾸웨웨웽엑!!!!!" << endl;
-		cout << "드래곤이 땅에 떨어지며 땅울림이 일어납니다." << endl;
-		cout << "축하합니다!! 모든 몬스터를 처치하여 " << player->getName() << "은(는) 자신의 운이 나쁘지 않음을 깨달았습니다!" << endl;
-
-		EndGame();
-		
-		return true;
-
-	}
-	return false;
-}
-
-
-
 bool GameManager::isDieCheck(Monster* monster)
 {
 	if (monster->getHealth() <= 0)
 	{
-		if (dynamic_cast<Dragon*>(monster) != nullptr)
-		{
-			if (KillDragon(monster))
-			{
-				return true;
-			}
-		}
-		else
-		{
-			cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
-			SetResultAfterCombat();
-			return true;
-		}
+		cout << "\n" << monster->getlastWord() << "\n" << endl;
+		cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
+		SetResultAfterCombat(monster);
+		return true;
 	}
 	if (player->getHealth() <= 0)
 	{
@@ -111,7 +80,7 @@ bool GameManager::isDieCheck(Monster* monster)
 	}
 	return false;
 }
-void  GameManager::SetResultAfterCombat()
+void  GameManager::SetResultAfterCombat(Monster* monster)
 {
 	isBattle = false;
 	DeactivateItem();
@@ -130,11 +99,11 @@ void  GameManager::SetResultAfterCombat()
 	player->showInfo();
 }
 
-bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* monster)
+void GameManager::DealDamage(Character* attacker, Character* victim)
 {
 	int damage = attacker->getCharacterDamage();
 	//크리티컬 확률
-	if (ProbabilityCheck(attacker->getCriticalProb()))
+	if (ProbabilityCheck(10))
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
 		cout << attacker->getName() << "이(가) " << victim->getName() << "에게 강력한 공격을 선사합니다!!!" << endl;
@@ -154,37 +123,36 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 		cout << "만큼 데미지를 입혔습니다!!" << endl;
 		cout << "대단하군요!!!\n\n";
 		attacker->takeDamage(damage);
-		return false;
+		return;
 	}
 	else
 	{
 		//방어자의 회피
-		if (ProbabilityCheck(victim->getEvasionProb()))
+		if (ProbabilityCheck(10))
 		{
 			cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 피했습니다!!" << endl;
 		}
 		else
 		{
 			//반감
-			if (ProbabilityCheck(victim->getHalfEvasionProb()))
+			if (ProbabilityCheck(10))
 			{
 				cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 빗겨나갔습니다!!" << endl;
 				damage /= 2;
 			}
 			victim->takeDamage(damage);
-			cout << attacker->getName() << "이(가) " << victim->getName() << "에게 "; 
+			cout << attacker->getName() << "이(가) " << victim->getName() << "에게 ";
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
 			cout << damage;
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 			cout << "만큼 데미지를 입혔습니다!!\n" << endl;
 		}
 	}
-	return isDieCheck(monster);
 }
 
 void GameManager::VisitAtShop()
 {
-	if (ProbabilityCheck(30))
+	if (ProbabilityCheck(10))
 	{
 		shops[1]->Shopping(player);
 
@@ -217,27 +185,12 @@ void GameManager::DeactivateItem()
 	}
 }
 
+
+
 void GameManager::Defeat()
 {
 	cout << "당신은 패배했습니다..." << endl;
 }
-
-void GameManager::EndGame()
-{
-	cout << "게임을 종료합니다." << endl;
-}
-
-//배경음
-void GameManager::PlaySimpleSound()
-{
-#define bgm "C:\\Users\\KimJH\\RandomTurnRpgProject\\EternalHunter\\Sound\\player.wav"
-	
-	PlaySound(TEXT(bgm), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
-
-}
-
-
-
 
 void GameManager::StartGame()
 {
@@ -266,7 +219,6 @@ void GameManager::StartGame()
 		IsPlayerWinAtCombat();
 		if (player->getHealth() < 0)
 		{
-
 			break;
 		}
 		else
@@ -275,4 +227,3 @@ void GameManager::StartGame()
 		}
 	}
 }
-

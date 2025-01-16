@@ -29,7 +29,7 @@
       <Filter>CustomLib</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="music.cpp" />
+    <ClCompile Include="useItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -60,6 +60,7 @@
       <Filter>CustomLib</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="useItem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Character">

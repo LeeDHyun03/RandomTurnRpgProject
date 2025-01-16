@@ -11,38 +11,33 @@
 #include <windows.h>
 using namespace std;
 
-
-
-class GameManager
-{
+class GameManager {
 private:
-	string input = string();
+    string input = string();
 public:
-	vector<Monster*> monsters;
-	vector<Shop*> shops = { new NormalShop({new HealthPotion, new DamageBoost}), new HiddenShop({new HealthPotion, new DamageBoost}) };
-	vector<UseItem*> activateItems;
-	Player* player;
-	bool isBattle = true;
-	GameManager();
-	~GameManager();
+    vector<Monster*> monsters;
+    vector<Shop*> shops = { new NormalShop({new HealthPotion(), new DamageBoost()}),
+                            new HiddenShop({ new WorldMostWeapon(), new MiddleWeapon() }) };
+    vector<UseItem*> activateItems;
+    Player* player;
+    bool isBattle = true;
 
-	void SetMonsters(int level);
+    GameManager();
+    ~GameManager();
 
-	void UsingItemWithProbability(int probability, Character* character);
-	void IsPlayerWinAtCombat();
-	bool isDieCheck(Monster* monster);
-	void  SetResultAfterCombat();
+    void SetMonsters(int level);
 
-	bool DealDamage(Character* attacker, Character* victim, Monster* monster);
-	void VisitAtShop();
+    void UsingItemWithProbability(int probability, Character* character);
+    void IsPlayerWinAtCombat();
+    bool isDieCheck(Monster* monster);
+    void SetResultAfterCombat(Monster* monster);
 
-	void DeactivateItem();
+    void DealDamage(Character* attacker, Character* victim);
+    void VisitAtShop();
 
-	bool KillDragon(Monster*monster);
-	void Defeat();
-	
+    void DeactivateItem();
 
-	void StartGame();
-	void EndGame();
-	void PlaySimpleSound();
+    void Defeat();
+
+    void StartGame();
 };

@@ -34,9 +34,9 @@ public:
 	~NormalShop(){}
 };
 
-class HiddenShop : public Shop
-{
+
+class HiddenShop : public Shop {
 public:
-	HiddenShop(vector<UseItem*> itemlist) : Shop("HiddenShop", itemlist) {}
-	~HiddenShop(){}
+	HiddenShop(vector<UseItem*> itemList);  // 생성자에 아이템 리스트 전달
+	void ShowHiddenShop(Player* player);  // 히든 상점 아이템 구매
 };

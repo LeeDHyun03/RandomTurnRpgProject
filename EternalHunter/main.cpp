@@ -14,7 +14,7 @@ int main() {
     srand(time(NULL));
 
     GameManager gm;
-    gm.PlaySimpleSound();
+    
     gm.StartGame();
    
     
