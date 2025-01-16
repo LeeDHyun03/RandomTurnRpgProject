@@ -43,6 +43,7 @@ void GameManager::UsingItemWithProbability(int probability, Character* character
 
 void GameManager::IsPlayerWinAtCombat()
 {
+	isBattle = true;
 	SetMonsters(player->getLevel());
 	Monster* monster = RandomItemFromVector(monsters);
 	monster->firstShowInfo();
@@ -56,7 +57,7 @@ void GameManager::IsPlayerWinAtCombat()
 		DealDamage(monster, player);
 		Sleep(1000);
 		if (isDieCheck(monster)) return;
-		UsingItemWithProbability(70, player);
+		UsingItemWithProbability(100, player);
 		monster->showInfo();
 		player->showInfoBattle();
 	}
@@ -80,6 +81,8 @@ bool GameManager::isDieCheck(Monster* monster)
 }
 void  GameManager::SetResultAfterCombat(Monster* monster)
 {
+	isBattle = false;
+	DeactivateItem();
 	int xp = 50;
 	int gold = randomInRange(10, 20);
 	player->modifyGold(gold);
@@ -112,8 +115,12 @@ void GameManager::DealDamage(Character* attacker, Character* victim)
 	{
 		cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 반사했습니다!!!!!!!!!" << endl;
 		Sleep(1000);
-		cout << victim->getName() << "이(가) " << attacker->getName() << "에게 " << damage << "만큼 데미지를 입혔습니다!!!!!!" << endl;
-		cout << "대단하군요!!!\n";
+		cout << victim->getName() << "이(가) " << attacker->getName() << "에게 ";
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
+		cout << damage;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
+		cout << "만큼 데미지를 입혔습니다!!" << endl;
+		cout << "대단하군요!!!\n\n";
 		attacker->takeDamage(damage);
 		return;
 	}
@@ -133,7 +140,11 @@ void GameManager::DealDamage(Character* attacker, Character* victim)
 				damage /= 2;
 			}
 			victim->takeDamage(damage);
-			cout << attacker->getName() << "이(가) " << victim->getName() << "에게 " << damage << "만큼 데미지를 입혔습니다!!" << endl;
+			cout << attacker->getName() << "이(가) " << victim->getName() << "에게 "; 
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
+			cout << damage;
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
+			cout << "만큼 데미지를 입혔습니다!!\n" << endl;
 		}
 	}
 }
@@ -153,16 +164,23 @@ void GameManager::VisitAtShop()
 
 void GameManager::DeactivateItem()
 {
-	if (activateItems.size() == 0) return;
+	if (activateItems.empty()) return;
 	for (int i = 0; i < activateItems.size(); i++)
 	{
-		activateItems[i]->modifyActivateTurn(1);
-		if (activateItems[i]->getActivateTurn() < activateItems[i]->getCurrentctivateTurn())
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13 | 0 << 4);
+		cout << "\n아이템 지속턴: " << activateItems[i]->getActivateTurn() << "|| 지속된 턴: " << activateItems[i]->getCurrentctivateTurn() << endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
+		if (activateItems[i]->getActivateTurn() <= activateItems[i]->getCurrentctivateTurn() || !isBattle)
 		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5 | 0 << 4);
+			cout << activateItems[i]->getName() << "의 사용 효과가 끝났습니다..\n\n";
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 			activateItems[i]->DeactivateItem(player);
 			delete activateItems[i];
 			activateItems.erase(activateItems.begin() + i);
+			return;
 		}
+		activateItems[i]->modifyActivateTurn(1);
 	}
 }
 
@@ -176,7 +194,7 @@ void GameManager::Defeat()
 void GameManager::StartGame()
 {
 	srand(static_cast<unsigned int>(time(0)));
-
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 	string playerName;
 
 	while (true)

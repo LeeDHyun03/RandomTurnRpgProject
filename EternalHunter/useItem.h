@@ -7,7 +7,7 @@ class UseItem : public Item
 protected:
 	int healthAmount;
 	int damageAmount;
-	int currentActivateTurn = 0;;
+	int currentActivateTurn = 0;
 	int activateTurn;
 	bool isUsed = false;
 	bool isActivate = false;
@@ -35,7 +35,7 @@ public:
 	//activateTurn
 	int getActivateTurn() { return activateTurn; }
 	int getCurrentctivateTurn() { return currentActivateTurn; }
-	void modifyActivateTurn(int amount) { this->activateTurn += amount; }
+	void modifyActivateTurn(int amount) { this->currentActivateTurn += amount; }
 };
 
 class HealthPotion : public UseItem
