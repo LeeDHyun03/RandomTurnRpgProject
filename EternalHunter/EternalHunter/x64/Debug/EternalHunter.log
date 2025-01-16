@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Character.cpp
   CustomLib.cpp
   GameManager.cpp
@@ -20,3 +21,11 @@ shop.obj : error LNK2001: 확인할 수 없는 외부 기호 "public: __cdecl He
 GameManager.obj : error LNK2019: "public: __cdecl DamageBoost::DamageBoost(void)" (??0DamageBoost@@QEAA@XZ)"public: __cdecl GameManager::GameManager(void)" (??0GameManager@@QEAA@XZ) 함수에서 참조되는 확인할 수 없는 외부 기호
 shop.obj : error LNK2001: 확인할 수 없는 외부 기호 "public: __cdecl DamageBoost::DamageBoost(void)" (??0DamageBoost@@QEAA@XZ)
 C:\Users\great\RandomTurnRpgProject\EternalHunter\x64\Debug\EternalHunter.exe : fatal error LNK1120: 2개의 확인할 수 없는 외부 참조입니다.
+=======
+﻿  music.cpp
+C:\Users\a3749\RandomTurnRpgProject\EternalHunter\music.cpp(31,17): warning C4477: 'scanf_s' : 서식 문자열 '%s'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'size_t'입니다.
+      C:\Users\a3749\RandomTurnRpgProject\EternalHunter\music.cpp(31,17):
+      이 인수는 버퍼 크기로 사용됩니다.
+  
+LINK : fatal error LNK1104: 'winuser.lib' 파일을 열 수 없습니다.
+>>>>>>> ea33009 (inventory인벤토리 변경 내역)
