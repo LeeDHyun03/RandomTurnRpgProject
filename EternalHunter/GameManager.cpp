@@ -177,7 +177,7 @@ void GameManager::DeactivateItem()
 			cout << activateItems[i]->getName() << "의 사용 효과가 끝났습니다..\n\n";
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 			activateItems[i]->DeactivateItem(player);
-			delete activateItems[i];
+			activateItems[i]->PoolItem();
 			activateItems.erase(activateItems.begin() + i);
 			return;
 		}

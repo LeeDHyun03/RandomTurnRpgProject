@@ -50,6 +50,12 @@ void HealthPotion::itemUse(Character* character)
 	isUsed = true;
 }
 void HealthPotion::DeactivateItem(Character* character) {}
+void HealthPotion::PoolItem()
+{
+	isUsed = false;
+	isActivate = false;
+	currentActivateTurn = false;
+}
 void DamageBoost::itemUse(Character* character)
 {
 	if (!character->getIsDamageBoost())
@@ -63,4 +69,11 @@ void DamageBoost::DeactivateItem(Character* character)
 {
 	character->modifyDamage(-damageAmount);
 	character->setIsDamageBoost(false);
+}
+
+void DamageBoost::PoolItem()
+{
+	isUsed = false;
+	isActivate = false;
+	currentActivateTurn = false;
 }
