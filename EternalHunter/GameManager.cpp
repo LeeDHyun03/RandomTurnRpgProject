@@ -86,14 +86,14 @@ void  GameManager::SetResultAfterCombat()
 	int gold = randomInRange(10, 20);
 	player->modifyGold(gold);
 	player->gainXP(xp);
-	Sleep(10);
+	Sleep(1000);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11 | 0 << 4);
 	cout << "Xp을 " << xp << "만큼 획득했습니다" << endl;
-	Sleep(10);
+	Sleep(1000);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14 | 0 << 4);
 	cout << "골드를 " << gold << "만큼 획득했습니다" << endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
-	Sleep(10);
+	Sleep(1000);
 	player->showInfo();
 }
 
@@ -106,7 +106,7 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12 | 0 << 4);
 		cout << attacker->getName() << "이(가) " << victim->getName() << "에게 강력한 공격을 선사합니다!!!" << endl;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
-		Sleep(10);
+		Sleep(1000);
 		damage *= 2;
 	}
 	//반사
