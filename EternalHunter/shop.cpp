@@ -110,7 +110,6 @@ void Shop::Shopping(Player* player)
 			if (succesProb == destroyProb || succesProb == choice)
 			{
 				player->getWeapon()->enforce(1);
-				cout << "asdf";
 				cout << "강화 성공!! 현재 강화 수치 : " << player->getWeapon()->getStack() << endl;
 				player->applyDamage();
 			}

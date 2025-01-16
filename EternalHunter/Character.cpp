@@ -18,7 +18,7 @@ void Character::modifyHealth(int amount) { this->health += amount; }
 
 int Character::getDamage() { return this->damage; }
 void Character::setDamage(int damage) { this->damage = damage; }
-void Character::modifyDamage(int amount) { cout << "asdf"; this->damage += amount; }
+void Character::modifyDamage(int amount) { this->damage += amount; }
 void Character::takeDamage(int damage) { modifyHealth(-damage); }
 
 void Character::showInfo()
