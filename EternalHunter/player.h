@@ -15,7 +15,7 @@ private:
 	const int maxXp = 100;
 	int gold;
 	Inventory inventory;
-	Weapon* myWeapon = new Weapon();
+	Weapon myWeapon;
 public:
 	Player();
 

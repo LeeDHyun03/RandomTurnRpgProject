@@ -17,6 +17,7 @@ private:
 	int health;
 	int maxHealth;
 	int damage;
+	int weaponDamage = 0;
 	bool isDamageBoost = false;
 	int criticalProb;
 	int evasionProb;
@@ -44,6 +45,10 @@ public:
 	void setDamage(int damage);
 	void modifyDamage(int amount);
 	void takeDamage(int damage);
+	int getWeaponDamage();
+	void setWeaponDamage(int damage);
+
+	int getCharacterDamage();
 
 	void useItem(Item* item);
 	
