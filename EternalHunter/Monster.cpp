@@ -49,21 +49,21 @@ Slime::Slime(int level)
 	setlastWord("Glorp... glorp...");
 }
 
-Dragon::Dragon(string name, int level, vector<Item*> itemList) //보스몬스터
-	: Character(name, level* randomInRange(20, 30 * 1.5f), level* randomInRange(20, 30 * 1.5f), level* randomInRange(5, 10 * 1.5f), 90, 50, 80) {}
+Dragon::Dragon(int level)
+	: Monster("Dragon", level){}
 
-void Dragon::firstShowInfo()
-{
-	cout << "-----------------------------------------------------------------------" << endl;
-	cout << "강력한 몬스터 " << this->getName() << " 등장!" << endl;
-	cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
-}
-
-void Dragon::showInfo()
-{
-	cout << "\n";
-	cout << "몬스터: " << this->getName() << endl;
-	cout << "남은 체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
-
-}
+//void Dragon::firstShowInfo()
+//{
+//	cout << "-----------------------------------------------------------------------" << endl;
+//	cout << "강력한 몬스터 " << this->getName() << " 등장!" << endl;
+//	cout << "체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
+//}
+//
+//void Dragon::showInfo()
+//{
+//	cout << "\n";
+//	cout << "몬스터: " << this->getName() << endl;
+//	cout << "남은 체력: " << this->getHealth() << ", 공격력: " << this->getDamage() << endl << endl;
+//
+//}
 

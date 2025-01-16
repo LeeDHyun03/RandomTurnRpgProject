@@ -34,11 +34,8 @@ public:
 	Slime(int level);
 };
 
-class Dragon : public Character
+class Dragon : public Monster
 {
 public:
-	Dragon(string name, int level, vector<Item*> itemList);
-
-	void firstShowInfo() override;
-	void showInfo() override;
+	Dragon(int level);
 };
