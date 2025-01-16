@@ -16,6 +16,9 @@ int Character::getDamage() { return this->damage; }
 void Character::setDamage(int damage) { this->damage = damage; }
 void Character::modifyDamage(int amount) { cout << "asdf"; this->damage += amount; }
 void Character::takeDamage(int damage) { modifyHealth(-damage); }
+int Character::getWeaponDamage() { return this->weaponDamage; }
+void Character::setWeaponDamage(int damage) { this->weaponDamage = damage; }
+int Character::getCharacterDamage() { return this->damage + this->weaponDamage; }
 
 void Character::showInfo()
 {

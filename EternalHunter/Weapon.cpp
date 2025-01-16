@@ -1,5 +1,5 @@
 #include "Weapon.h"
-
+#include "math.h"
 
 Weapon::Weapon() //무기 기본생성자
 	:stack(0), Item()
@@ -14,6 +14,11 @@ void Weapon::enforce(int amount) //무기 강화
 {
 	stack += amount; //강화 수치
 	this->setDamageAmount(this->getDamageAmount() * 1.5f * amount); //성공시 증가량
+}
+
+void Weapon::breakWeapon()
+{
+	this->setDamageAmount(ceil(this->getDamageAmount() / pow(1.5f, getStack())));
 }
 
 bool Weapon::tryToEnforce(int amount) //강화 로직?

@@ -101,15 +101,15 @@ void Shop::Shopping(Player* player)
 			if (succesProb == destroyProb || succesProb == choice)
 			{
 				player->getWeapon()->enforce(1);
-				cout << "asdf";
 				cout << "강화 성공!! 현재 강화 수치 : " << player->getWeapon()->getStack() << endl;
 				player->applyDamage();
+				cout << "무기 데미지" << player->getWeaponDamage();
 			}
 			else if (destroyProb == choice)
 			{
 				cout << "강화에 실패하여 장비가 파괴되었습니다." << endl;
 				player->getWeapon()->setName("무기였던 것");  // 강화 실패 시 무기 이름 변경
-				player->getWeapon()->setDamageAmount(0);  // 강화 실패 시 무기 데미지 0으로 설정
+				player->getWeapon()->breakWeapon();  // 강화 실패 시 무기 데미지 0으로 설정
 				cout << "무기 이름 : " << player->getWeapon()->getName() << "       무기 데미지 : " << player->getWeapon()->getDamageAmount() << endl;
 				player->applyDamage();
 			}
