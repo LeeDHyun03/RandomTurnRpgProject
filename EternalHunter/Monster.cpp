@@ -50,7 +50,7 @@ Slime::Slime(int level)
 }
 
 Dragon::Dragon(int level)
-	: Monster("Dragon", level){}
+	: Monster("Dragon", level, 80, 60, 80){}
 
 //void Dragon::firstShowInfo()
 //{
