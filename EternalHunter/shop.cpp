@@ -63,6 +63,10 @@ void Shop::Shopping(Player* player)
 		case 1:
 			system("cls");
 			player->showInfo();
+			if (player->getInventory().getSize() > 3)
+			{
+				cout << "인벤토리가 가득 찼습니다.\n";
+			}
 			cout << "\n-----------------------------------------------------------------------\n";
 			cout << "-----------------------------------------------------------------------\n";
 			cout << "판매 목록 확인\n";

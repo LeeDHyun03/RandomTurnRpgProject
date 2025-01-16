@@ -38,12 +38,12 @@ void GameManager::UsingItemWithProbability(int probability, Character* playerCha
 		int i = player->getInventory().getSize();
 		int index = randomInRange(0, i - 1);
 		UseItem* randomItem = player->getInventory().getItem(index);
-		for (int j = 0; j < i; j++)
+		for (int j = 0; j < activateItems.size(); j++)
 		{
 			if (activateItems.empty()) break;
 			if (randomItem->getName() == activateItems[j]->getName())
 			{
-				activateItems[j]->modifyAcitvateTurn(activateItems[j]->getActivateTurn());
+				activateItems[j]->modifyAcitvateTurn(1);
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10 | 0 << 4);
 				cout << randomItem->getName() << "지속턴 증가!" << endl;
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
@@ -55,10 +55,12 @@ void GameManager::UsingItemWithProbability(int probability, Character* playerCha
 		else randomItem->itemUse(monster);
 		if (randomItem->getIsActivate())
 			activateItems.push_back(randomItem->clone());
-
+		
+		Sleep(1000);
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10 | 0 << 4);
 		cout << "아이템" << randomItem->getName() << "사용!" << endl;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
+		Sleep(1000);
 
 		player->removeItemFromInventory(index);
 
@@ -76,12 +78,19 @@ void GameManager::IsPlayerWinAtCombat()
 		DeactivateItem(monster);
 		monster->showInfo();
 		player->showInfoBattle();
-		Sleep(10);
+		cout  << endl;
+		Sleep(300);
+		cout << "\n" << player->getName() << "의 차례!" << endl;
 		if(DealDamage(player, monster, monster)) return;
-		Sleep(10);
+		Sleep(300);
+		cout << "\n" << monster->getName() << "의 차례!" << endl;
 		if(DealDamage(monster, player, monster)) return;
-		Sleep(10);
+		Sleep(300);
+		cout << endl;
 		UsingItemWithProbability(100, player, monster);
+		cout << "아무 버튼이나 눌러 전투를 진행하세요!";
+		cin >> input;
+		system("cls");
 	}
 }
 
@@ -133,7 +142,7 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 {
 	if (attacker->getIsStun())
 	{
-		cout << "기절 상태입니다..\n";
+		cout << attacker->getName() << "은 기절 상태입니다..\n";
 		return false;
 	}
 	int damage = attacker->getCharacterDamage();
@@ -157,6 +166,7 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 		cout << "만큼 데미지를 입혔습니다!!" << endl;
 		cout << "대단하군요!!!\n\n";
+		Sleep(1000);
 		attacker->takeDamage(damage);
 		return false;
 	}
@@ -166,6 +176,7 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 		if (ProbabilityCheck(victim->getEvasionProb()))
 		{
 			cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 피했습니다!!" << endl;
+			Sleep(1000);
 		}
 		else
 		{
@@ -173,6 +184,7 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 			if (ProbabilityCheck(victim->getHalfEvasionProb()))
 			{
 				cout << victim->getName() << "이(가) " << attacker->getName() << "의 공격을 빗겨나갔습니다!!" << endl;
+				Sleep(1000);
 				damage /= 2;
 			}
 			victim->takeDamage(damage);
@@ -181,6 +193,7 @@ bool GameManager::DealDamage(Character* attacker, Character* victim, Monster* mo
 			cout << damage;
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15 | 0 << 4);
 			cout << "만큼 데미지를 입혔습니다!!\n" << endl;
+			Sleep(1000);
 		}
 	}
 	return isDieCheck(monster);
@@ -284,7 +297,7 @@ void GameManager::StartGame()
 
 	while (true) {
 		IsPlayerWinAtCombat();
-		if (player->getHealth() < 0)
+		if (player->getHealth() <= 0)
 		{
 			break;
 		}

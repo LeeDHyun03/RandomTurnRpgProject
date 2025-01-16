@@ -52,6 +52,7 @@ void HealthPotion::itemUse(Character* character)
 {
 	if (character->getHealth() == character->getMaxHealth()) return;
 	character->modifyHealth(healthAmount);
+	if (character->getHealth() > character->getMaxHealth()) character->setHealth(character->getMaxHealth());
 }
 
 void HealthPotion::DeactivateItem(Character* character) {}
