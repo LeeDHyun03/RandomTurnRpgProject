@@ -16,7 +16,7 @@ void Inventory::addItem(UseItem* item) {
 
 void Inventory::removeItem(int index) {
     if (index >= 0 && index < items.size()) {
-        delete items[index];  // 아이템 메모리 해제
+        items[index]->PoolItem();
         items.erase(items.begin() + index);  // 인덱스에 해당하는 아이템 제거
     }
 }

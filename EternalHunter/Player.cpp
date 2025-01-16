@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Player::Player() :Character("Player", 200, 200, 15), level(1), xp(0), gold(0) {}  // 인벤토리 초기화
+Player::Player() :Character("Player", 50, 50, 15), level(1), xp(0), gold(0) {}  // 인벤토리 초기화
 
 Player::~Player() {}
 

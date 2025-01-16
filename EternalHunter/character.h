@@ -12,6 +12,8 @@ class Character
 {
 private:
 	string name;
+	string sound;
+	string lastWord;
 	int health;
 	int maxHealth;
 	int damage;
@@ -23,6 +25,11 @@ public:
 	virtual ~Character();
 	string getName();
 	void setName(string name);
+
+	string getSound();
+	void setSound(string sound);
+	string getlastWord();
+	void setlastWord(string lastWord);
 
 	int getHealth();
 	int getMaxHealth();

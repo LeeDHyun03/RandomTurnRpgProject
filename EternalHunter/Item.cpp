@@ -24,7 +24,3 @@ int Item::getPrice()			//АЁАн
 {
 	return this->price;
 }
-
-
-
-
