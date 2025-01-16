@@ -54,6 +54,10 @@ public:
 	bool getIsDamageBoost();
 	void setIsDamageBoost(bool isDamageBoost);
 
+	int getCriticalProb() { return criticalProb; }
+	int getEvasionProb() { return evasionProb; }
+	int getHalfEvasionProb() { return halfEvasionProb; }
+
 	virtual void firstShowInfo();
 	virtual void showInfo();
 	virtual void showInfoBattle();
