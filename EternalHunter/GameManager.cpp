@@ -18,7 +18,13 @@ GameManager::~GameManager()
 
 void GameManager::SetMonsters(int level)
 {
-	this->monsters = { new Goblin(level), new Orc(level), new Troll(level), new Slime(level) };
+	if (player->getLevel() == 10) {
+		this->monsters = { new Dragon(level) };
+	}
+	else
+	{
+		this->monsters = { new Goblin(level), new Orc(level), new Troll(level), new Slime(level) };
+	}
 }
 
 void GameManager::UsingItemWithProbability(int probability, Character* character)
@@ -53,22 +59,53 @@ void GameManager::IsPlayerWinAtCombat()
 		DealDamage(player, monster);
 		Sleep(1000);
 		if (isDieCheck(monster)) return;
+		
 		DealDamage(monster, player);
 		Sleep(1000);
 		if (isDieCheck(monster)) return;
+	
+		
 		UsingItemWithProbability(70, player);
 		monster->showInfo();
 		player->showInfoBattle();
 	}
 }
 
+bool GameManager::KillDragon(Monster* monster)
+{
+	if (dynamic_cast<Dragon*>(monster) != nullptr && monster->getHealth() <= 0)
+	{
+		cout << "꾸웨웨웽엑!!!!!" << endl;
+		cout << "드래곤이 땅에 떨어지며 땅울림이 일어납니다." << endl;
+		cout << "축하합니다!! 모든 몬스터를 처치하여 " << player->getName() << "은(는) 자신의 운이 나쁘지 않음을 깨달았습니다!" << endl;
+
+		EndGame();
+		
+		return true;
+
+	}
+	return false;
+}
+
+
+
 bool GameManager::isDieCheck(Monster* monster)
 {
 	if (monster->getHealth() <= 0)
 	{
-		cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
-		SetResultAfterCombat(monster);
-		return true;
+		if (dynamic_cast<Dragon*>(monster) != nullptr)
+		{
+			if (KillDragon(monster))
+			{
+				return true;
+			}
+		}
+		else
+		{
+			cout << monster->getName() << "을(를) " << "쓰러뜨렸습니다!!" << endl << endl;
+			SetResultAfterCombat(monster);
+			return true;
+		}
 	}
 	if (player->getHealth() <= 0)
 	{
@@ -166,12 +203,27 @@ void GameManager::DeactivateItem()
 	}
 }
 
-
-
 void GameManager::Defeat()
 {
 	cout << "당신은 패배했습니다..." << endl;
 }
+
+void GameManager::EndGame()
+{
+	cout << "게임을 종료합니다." << endl;
+}
+
+//배경음
+void GameManager::PlaySimpleSound()
+{
+#define bgm "C:\\Users\\KimJH\\RandomTurnRpgProject\\EternalHunter\\Sound\\player.wav"
+	
+	PlaySound(TEXT(bgm), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+
+}
+
+
+
 
 void GameManager::StartGame()
 {
@@ -200,6 +252,7 @@ void GameManager::StartGame()
 		IsPlayerWinAtCombat();
 		if (player->getHealth() < 0)
 		{
+
 			break;
 		}
 		else
@@ -208,3 +261,4 @@ void GameManager::StartGame()
 		}
 	}
 }
+

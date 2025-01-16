@@ -37,7 +37,11 @@ public:
 
 	void DeactivateItem();
 
+	bool KillDragon(Monster*monster);
 	void Defeat();
+	
 
 	void StartGame();
+	void EndGame();
+	void PlaySimpleSound();
 };
